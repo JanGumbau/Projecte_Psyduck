@@ -4,13 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class canvi_escenea : MonoBehaviour
 {
-    
-    public void OnButtonClick()
+
+    public void LoadScene(string nextScene)
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene(nextScene);
 
         
     }
-
-  
+    public void QuitGame()
+    {
+        Application.Quit();
+    }  
 }
