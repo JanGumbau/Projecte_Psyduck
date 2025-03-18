@@ -19,6 +19,11 @@ public class ControllerCharacter : MonoBehaviour
     public float attackCooldown = 0.3f;
     public LayerMask enemyLayers;
 
+    public BoxCollider2D HitboxRight;
+    public BoxCollider2D HitboxLeft;
+
+    public float hitboxDuration = 0.2f; // Tiempo de duración de la hitbox
+
     void Start()
     {
         if (playerRB == null)
@@ -31,7 +36,11 @@ public class ControllerCharacter : MonoBehaviour
 
     void Update()
     {
+<<<<<<< HEAD
         // Movimiento
+=======
+        // Movimiento horizontal
+>>>>>>> feature/menu
         if (Input.GetKey(KeyCode.D))
         {
             animator.SetBool("isRunning", true);
@@ -57,6 +66,7 @@ public class ControllerCharacter : MonoBehaviour
             playerRB.velocity = new Vector2(playerRB.velocity.x, Impuls);
             canJump = false;
         }
+<<<<<<< HEAD
         else
         {
             animator.SetBool("isJumping", false);
@@ -67,6 +77,21 @@ public class ControllerCharacter : MonoBehaviour
         {
             StartCoroutine(PerformAttack());
             animator.SetBool("isAttacking", true);
+=======
+
+        // Activación de la hitbox derecha
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            HitboxRight.gameObject.SetActive(true);
+            StartCoroutine(DeactivateHitbox(HitboxRight));
+        }
+
+        // Activación de la hitbox izquierda
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            HitboxLeft.gameObject.SetActive(true);
+            StartCoroutine(DeactivateHitbox(HitboxLeft));
+>>>>>>> feature/menu
         }
     }
 
@@ -91,6 +116,7 @@ public class ControllerCharacter : MonoBehaviour
         }
     }
 
+<<<<<<< HEAD
     IEnumerator PerformAttack()
     {
         isAttacking = true;
@@ -120,5 +146,11 @@ public class ControllerCharacter : MonoBehaviour
         if (attackPoint == null) return;
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+=======
+    private IEnumerator DeactivateHitbox(BoxCollider2D hitbox)
+    {
+        yield return new WaitForSeconds(hitboxDuration);
+        hitbox.gameObject.SetActive(false);
+>>>>>>> feature/menu
     }
 }
