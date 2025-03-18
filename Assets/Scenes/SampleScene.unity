@@ -638,6 +638,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4004342547023671625, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
+      propertyPath: Impuls
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -4004342547023671625, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
+      propertyPath: velocity
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 259561167087253305, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
       propertyPath: m_Name
       value: Character
@@ -712,6 +720,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 259561167087253305, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2059347207}
+    - targetCorrespondingSourceObject: {fileID: 259561167087253305, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2059347212}
   m_SourcePrefab: {fileID: 100100000, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
 --- !u!1 &2059347206 stripped
 >>>>>>> origin/feature/characterController
@@ -1130,6 +1141,7 @@ Transform:
 =======
   m_Size: {x: 1, y: 1.75}
   m_EdgeRadius: 0
+<<<<<<< HEAD
 >>>>>>> origin/feature/characterController
 =======
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1137,3 +1149,26 @@ Transform:
 >>>>>>> feature/fondo
 =======
 >>>>>>> feature/menu
+=======
+--- !u!95 &2059347212
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059347206}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b41dbfc7238b8f74b92312a3b7677e9f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+>>>>>>> feature/characterController
