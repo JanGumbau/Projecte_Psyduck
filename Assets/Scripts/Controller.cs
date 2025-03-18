@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +10,11 @@ public class ControllerCharacter : MonoBehaviour
     private int xDirection = 0;
     public Rigidbody2D playerRB;
 
+    public BoxCollider2D HitboxRight;
+    public BoxCollider2D HitboxLeft;
+
+    public float hitboxDuration = 0.2f; // Tiempo de duración de la hitbox
+
     void Start()
     {
         if (playerRB == null)
@@ -21,6 +25,7 @@ public class ControllerCharacter : MonoBehaviour
 
     void Update()
     {
+        // Movimiento horizontal
         if (Input.GetKey(KeyCode.D))
         {
             xDirection = 1;
@@ -34,10 +39,25 @@ public class ControllerCharacter : MonoBehaviour
             xDirection = 0;
         }
 
+        // Salto
         if (Input.GetKeyDown(KeyCode.W) && canJump)
         {
             playerRB.AddForce(Vector2.up * Impuls, ForceMode2D.Impulse);
             canJump = false;
+        }
+
+        // Activación de la hitbox derecha
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            HitboxRight.gameObject.SetActive(true);
+            StartCoroutine(DeactivateHitbox(HitboxRight));
+        }
+
+        // Activación de la hitbox izquierda
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            HitboxLeft.gameObject.SetActive(true);
+            StartCoroutine(DeactivateHitbox(HitboxLeft));
         }
     }
 
@@ -60,5 +80,11 @@ public class ControllerCharacter : MonoBehaviour
         {
             canJump = false;
         }
+    }
+
+    private IEnumerator DeactivateHitbox(BoxCollider2D hitbox)
+    {
+        yield return new WaitForSeconds(hitboxDuration);
+        hitbox.gameObject.SetActive(false);
     }
 }
