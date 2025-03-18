@@ -143,6 +143,7 @@ NavMeshSettings:
   m_NavMeshData: {fileID: 0}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 --- !u!1 &228193699
 GameObject:
@@ -1134,3 +1135,5 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 >>>>>>> fondo
 >>>>>>> feature/fondo
+=======
+>>>>>>> feature/menu
