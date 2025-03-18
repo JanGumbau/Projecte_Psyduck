@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 8c9cfa26abfee488c85f1582747f6a02
+=======
+guid: 2cda990e2423bbf4892e6590ba056729
+>>>>>>> feature/character_controller
 DefaultImporter:
   externalObjects: {}
   userData: 
