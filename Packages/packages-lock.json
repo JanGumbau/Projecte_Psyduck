@@ -1,5 +1,6 @@
 {
   "dependencies": {
+<<<<<<< HEAD
     "com.unity.2d.animation": {
       "version": "9.0.3",
       "depth": 1,
@@ -256,6 +257,8 @@
       },
       "url": "https://packages.unity.com"
     },
+=======
+>>>>>>> feature/character_controller
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
