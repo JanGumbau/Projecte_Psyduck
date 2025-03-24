@@ -7,7 +7,7 @@ public class canvi_escenea : MonoBehaviour
 
     public void LoadScene(string nextScene)
     {
-        SceneManager.LoadScene(nextScene);
+        SceneManager.LoadScene("level1");
 
         
     }
