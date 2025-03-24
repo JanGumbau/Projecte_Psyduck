@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControllerCharacter : MonoBehaviour
+public class Controller : MonoBehaviour
 {
     public bool canJump = false;
     public float Impuls = 5f;

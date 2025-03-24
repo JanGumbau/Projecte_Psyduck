@@ -8,7 +8,8 @@ public class ControllerCharacter : MonoBehaviour
     public float Impuls = 5f;
     public float velocity = 5f;
     private int xDirection = 0;
-    public Rigidbody2D playerRB;
+    [SerializeField]
+    private Rigidbody2D playerRB;
     private Animator animator;
     private bool isAttacking = false;
 
@@ -36,11 +37,7 @@ public class ControllerCharacter : MonoBehaviour
 
     void Update()
     {
-<<<<<<< HEAD
-        // Movimiento
-=======
-        // Movimiento horizontal
->>>>>>> feature/menu
+
         if (Input.GetKey(KeyCode.D))
         {
             animator.SetBool("isRunning", true);
@@ -66,7 +63,7 @@ public class ControllerCharacter : MonoBehaviour
             playerRB.velocity = new Vector2(playerRB.velocity.x, Impuls);
             canJump = false;
         }
-<<<<<<< HEAD
+
         else
         {
             animator.SetBool("isJumping", false);
@@ -77,80 +74,84 @@ public class ControllerCharacter : MonoBehaviour
         {
             StartCoroutine(PerformAttack());
             animator.SetBool("isAttacking", true);
-=======
 
-        // Activación de la hitbox derecha
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            HitboxRight.gameObject.SetActive(true);
-            StartCoroutine(DeactivateHitbox(HitboxRight));
+
+            // Activación de la hitbox derecha
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                HitboxRight.gameObject.SetActive(true);
+                StartCoroutine(DeactivateHitbox(HitboxRight));
+            }
+
+            // Activación de la hitbox izquierda
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                HitboxLeft.gameObject.SetActive(true);
+                StartCoroutine(DeactivateHitbox(HitboxLeft));
+
+            }
         }
 
-        // Activación de la hitbox izquierda
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        void FixedUpdate()
         {
-            HitboxLeft.gameObject.SetActive(true);
-            StartCoroutine(DeactivateHitbox(HitboxLeft));
->>>>>>> feature/menu
+            playerRB.velocity = new Vector2(xDirection * velocity, playerRB.velocity.y);
         }
-    }
 
-    void FixedUpdate()
-    {
-        playerRB.velocity = new Vector2(xDirection * velocity, playerRB.velocity.y);
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("GROUND"))
+       void OnCollisionStay2D(Collision2D collision)
         {
-            canJump = true;
+            if (collision.gameObject.CompareTag("GROUND"))
+            {
+                canJump = true;
+            }
         }
-    }
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("GROUND"))
+         void OnCollisionExit2D(Collision2D collision)
         {
-            canJump = false;
+            if (collision.gameObject.CompareTag("GROUND"))
+            {
+                canJump = false;
+            }
         }
-    }
 
-<<<<<<< HEAD
-    IEnumerator PerformAttack()
-    {
-        isAttacking = true;
-        animator.SetTrigger("Attack");
 
-        // Determinar dirección del ataque
-        Vector2 attackDirection = Vector2.right * transform.localScale.x;
-        if (Input.GetAxisRaw("Vertical") > 0) attackDirection = Vector2.up;
-        if (Input.GetAxisRaw("Vertical") < 0) attackDirection = Vector2.down;
+        IEnumerator PerformAttack()
+        {
+            isAttacking = true;
+            animator.SetTrigger("Attack");
 
-        // Mover el attackPoint en la dirección correcta
-        attackPoint.localPosition = attackDirection * 0.5f;
+            // Determinar dirección del ataque
+            Vector2 attackDirection = Vector2.right * transform.localScale.x;
+            if (Input.GetAxisRaw("Vertical") > 0) attackDirection = Vector2.up;
+            if (Input.GetAxisRaw("Vertical") < 0) attackDirection = Vector2.down;
 
-        // Detectar enemigos en la hitbox
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-        //foreach (Collider2D enemy in hitEnemies)
-        //{
-        //    enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
-        //}
+            // Mover el attackPoint en la dirección correcta
+            attackPoint.localPosition = attackDirection * 0.5f;
 
-        yield return new WaitForSeconds(attackCooldown);
-        isAttacking = false;
-    }
+            // Detectar enemigos en la hitbox
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+            //foreach (Collider2D enemy in hitEnemies)
+            //{
+            //    enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+            //}
 
-    void OnDrawGizmosSelected()
-    {
-        if (attackPoint == null) return;
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-=======
-    private IEnumerator DeactivateHitbox(BoxCollider2D hitbox)
-    {
-        yield return new WaitForSeconds(hitboxDuration);
-        hitbox.gameObject.SetActive(false);
->>>>>>> feature/menu
+            yield return new WaitForSeconds(attackCooldown);
+            isAttacking = false;
+        }
+
+        void OnDrawGizmosSelected()
+        {
+            if (attackPoint == null) return;
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+
+
+        }
+
+        IEnumerator DeactivateHitbox(BoxCollider2D hitbox)
+        {
+            yield return new WaitForSeconds(hitboxDuration);
+            hitbox.gameObject.SetActive(false);
+
+        }
     }
 }
