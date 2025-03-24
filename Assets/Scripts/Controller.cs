@@ -27,7 +27,7 @@ public class ControllerCharacter : MonoBehaviour
 
     void Start()
     {
-        if (playerRB == null)
+        if (playerRB != null)
         {
             playerRB = GetComponent<Rigidbody2D>();
         }
@@ -60,7 +60,7 @@ public class ControllerCharacter : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W) && canJump)
         {
             animator.SetBool("isJumping", true);
-            playerRB.velocity = new Vector2(playerRB.velocity.x, Impuls);
+            playerRB.AddForce(Vector3.up * Impuls);
             canJump = false;
         }
 
@@ -69,89 +69,87 @@ public class ControllerCharacter : MonoBehaviour
             animator.SetBool("isJumping", false);
         }
 
-        // Ataque
-        if (Input.GetKeyDown(KeyCode.J) && !isAttacking)
-        {
-            StartCoroutine(PerformAttack());
-            animator.SetBool("isAttacking", true);
-
-
-            // Activación de la hitbox derecha
+     
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
+                StartCoroutine(PerformAttack());
+                animator.SetBool("isAttacking", true);
                 HitboxRight.gameObject.SetActive(true);
                 StartCoroutine(DeactivateHitbox(HitboxRight));
+                animator.SetBool("isAttacking", false);
             }
 
             // Activación de la hitbox izquierda
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
+                StartCoroutine(PerformAttack());
+                animator.SetBool("isAttacking", true);
                 HitboxLeft.gameObject.SetActive(true);
                 StartCoroutine(DeactivateHitbox(HitboxLeft));
 
             }
-        }
+              
+    }
 
-        void FixedUpdate()
+    void FixedUpdate()
+    {
+        playerRB.velocity = new Vector2(xDirection * velocity, playerRB.velocity.y);
+    }
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("GROUND"))
         {
-            playerRB.velocity = new Vector2(xDirection * velocity, playerRB.velocity.y);
+            canJump = true;
         }
+    }
 
-       void OnCollisionStay2D(Collision2D collision)
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("GROUND"))
         {
-            if (collision.gameObject.CompareTag("GROUND"))
-            {
-                canJump = true;
-            }
+            canJump = false;
         }
-
-         void OnCollisionExit2D(Collision2D collision)
-        {
-            if (collision.gameObject.CompareTag("GROUND"))
-            {
-                canJump = false;
-            }
-        }
+    }
 
 
-        IEnumerator PerformAttack()
-        {
-            isAttacking = true;
-            animator.SetTrigger("Attack");
+    IEnumerator PerformAttack()
+    {
+        isAttacking = true;
+        animator.SetTrigger("Attack");
 
-            // Determinar dirección del ataque
-            Vector2 attackDirection = Vector2.right * transform.localScale.x;
-            if (Input.GetAxisRaw("Vertical") > 0) attackDirection = Vector2.up;
-            if (Input.GetAxisRaw("Vertical") < 0) attackDirection = Vector2.down;
+        // Determinar dirección del ataque
+        Vector2 attackDirection = Vector2.right * transform.localScale.x;
+        if (Input.GetAxisRaw("Vertical") > 0) attackDirection = Vector2.up;
+        if (Input.GetAxisRaw("Vertical") < 0) attackDirection = Vector2.down;
 
-            // Mover el attackPoint en la dirección correcta
-            attackPoint.localPosition = attackDirection * 0.5f;
+        // Mover el attackPoint en la dirección correcta
+        attackPoint.localPosition = attackDirection * 0.5f;
 
-            // Detectar enemigos en la hitbox
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-            //foreach (Collider2D enemy in hitEnemies)
-            //{
-            //    enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
-            //}
+        // Detectar enemigos en la hitbox
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        //foreach (Collider2D enemy in hitEnemies)
+        //{
+        //    enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+        //}
 
-            yield return new WaitForSeconds(attackCooldown);
-            isAttacking = false;
-        }
+        yield return new WaitForSeconds(attackCooldown);
+        isAttacking = false;
+    }
 
-        void OnDrawGizmosSelected()
-        {
-            if (attackPoint == null) return;
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null) return;
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
 
 
-        }
+    }
 
-        IEnumerator DeactivateHitbox(BoxCollider2D hitbox)
-        {
-            yield return new WaitForSeconds(hitboxDuration);
-            hitbox.gameObject.SetActive(false);
+    IEnumerator DeactivateHitbox(BoxCollider2D hitbox)
+    {
+        yield return new WaitForSeconds(hitboxDuration);
+        hitbox.gameObject.SetActive(false);
 
-        }
     }
 }

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 292867418795516961}
   - component: {fileID: 2426068100868452305}
-  - component: {fileID: -4004342547023671625}
   - component: {fileID: -1385868621409065365}
   - component: {fileID: -6556120571682302072}
   m_Layer: 0
@@ -33,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2426068100868452305
 SpriteRenderer:
@@ -87,22 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-4004342547023671625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259561167087253305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3663dd7ed515a024fa9785d018f45604, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canJump: 0
-  Impuls: 5
-  velocity: 5
-  playerRB: {fileID: -1385868621409065365}
 --- !u!50 &-1385868621409065365
 Rigidbody2D:
   serializedVersion: 4
