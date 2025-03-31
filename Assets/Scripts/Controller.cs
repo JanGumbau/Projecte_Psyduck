@@ -83,6 +83,11 @@ public class ControllerCharacter : MonoBehaviour
             HitboxDown.gameObject.SetActive(true);
             StartCoroutine(DeactivateHitbox(HitboxDown));
         }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            ReiniciarNivel();
+        }
     }
 
     void FixedUpdate()
