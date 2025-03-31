@@ -21,7 +21,7 @@ public class ControllerCharacter : MonoBehaviour
     public BoxCollider2D HitboxUp;
     public BoxCollider2D HitboxDown;
 
-    public float hitboxDuration = 0.2f; // Tiempo de duraci�n de la hitbox
+    public float hitboxDuration = 0.2f; // Tiempo de duración de la hitbox
 
     void Start()
     {
@@ -57,14 +57,14 @@ public class ControllerCharacter : MonoBehaviour
         }
 
         //Atac
-        // Activaci�n de la hitbox derecha
+        // Activación de la hitbox derecha
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             HitboxRight.gameObject.SetActive(true);
             StartCoroutine(DeactivateHitbox(HitboxRight));
         }
 
-        // Activaci�n de la hitbox izquierda
+        // Activación de la hitbox izquierda
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             HitboxLeft.gameObject.SetActive(true);
@@ -72,14 +72,14 @@ public class ControllerCharacter : MonoBehaviour
 
         }
 
-        // Activaci�n de la hitbox de arriba
+        // Activación de la hitbox de arriba
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             HitboxUp.gameObject.SetActive(true);
             StartCoroutine(DeactivateHitbox(HitboxUp));
         }
 
-        // Activaci�n de la hitbox de abajo
+        // Activación de la hitbox de abajo
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             HitboxDown.gameObject.SetActive(true);
@@ -107,45 +107,16 @@ public class ControllerCharacter : MonoBehaviour
             canJump = false;
         }
     }
-
     void OnCollisionEnter2D(Collision2D collision)
+
     {
+
         if (collision.gameObject.CompareTag("PINCHOS") || collision.gameObject.CompareTag("ENEMIC"))
+
             ReiniciarNivel();
-    }
-
-    IEnumerator PerformAttack()
-    {
-        isAttacking = true;
-        animator.SetTrigger("Attack");
-
-        // Determinar direcci�n del ataque
-        Vector2 attackDirection = Vector2.right * transform.localScale.x;
-        if (Input.GetAxisRaw("Vertical") > 0) attackDirection = Vector2.up;
-        if (Input.GetAxisRaw("Vertical") < 0) attackDirection = Vector2.down;
-
-        // Mover el attackPoint en la direcci�n correcta
-        attackPoint.localPosition = attackDirection * 0.5f;
-
-        // Detectar enemigos en la hitbox
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-        //foreach (Collider2D enemy in hitEnemies)
-        //{
-        //    enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
-        //}
-
-        yield return new WaitForSeconds(attackCooldown);
-        isAttacking = false;
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        if (attackPoint == null) return;
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-
 
     }
+
 
     IEnumerator DeactivateHitbox(BoxCollider2D hitbox)
     {
@@ -153,10 +124,12 @@ public class ControllerCharacter : MonoBehaviour
         hitbox.gameObject.SetActive(false);
 
     }
-
     void ReiniciarNivel()
+
     {
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reinicia el nivel
+
     }
 
 
