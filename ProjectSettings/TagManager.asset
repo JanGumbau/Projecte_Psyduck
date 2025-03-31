@@ -6,7 +6,6 @@ TagManager:
   tags:
   - GROUND
   - ENEMIC
-  - PINCHOS
   layers:
   - Default
   - TransparentFX
