@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ControllerCharacter : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class ControllerCharacter : MonoBehaviour
     public BoxCollider2D HitboxUp;
     public BoxCollider2D HitboxDown;
 
-    public float hitboxDuration = 0.2f; // Tiempo de duración de la hitbox
+    public float hitboxDuration = 0.2f; // Tiempo de duraciï¿½n de la hitbox
 
     void Start()
     {
@@ -56,14 +57,14 @@ public class ControllerCharacter : MonoBehaviour
         }
 
         //Atac
-        // Activación de la hitbox derecha
+        // Activaciï¿½n de la hitbox derecha
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             HitboxRight.gameObject.SetActive(true);
             StartCoroutine(DeactivateHitbox(HitboxRight));
         }
 
-        // Activación de la hitbox izquierda
+        // Activaciï¿½n de la hitbox izquierda
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             HitboxLeft.gameObject.SetActive(true);
@@ -71,14 +72,14 @@ public class ControllerCharacter : MonoBehaviour
 
         }
 
-        // Activación de la hitbox de arriba
+        // Activaciï¿½n de la hitbox de arriba
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             HitboxUp.gameObject.SetActive(true);
             StartCoroutine(DeactivateHitbox(HitboxUp));
         }
 
-        // Activación de la hitbox de abajo
+        // Activaciï¿½n de la hitbox de abajo
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             HitboxDown.gameObject.SetActive(true);
@@ -107,10 +108,56 @@ public class ControllerCharacter : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("PINCHOS") || collision.gameObject.CompareTag("ENEMIC"))
+            ReiniciarNivel();
+    }
+
+    IEnumerator PerformAttack()
+    {
+        isAttacking = true;
+        animator.SetTrigger("Attack");
+
+        // Determinar direcciï¿½n del ataque
+        Vector2 attackDirection = Vector2.right * transform.localScale.x;
+        if (Input.GetAxisRaw("Vertical") > 0) attackDirection = Vector2.up;
+        if (Input.GetAxisRaw("Vertical") < 0) attackDirection = Vector2.down;
+
+        // Mover el attackPoint en la direcciï¿½n correcta
+        attackPoint.localPosition = attackDirection * 0.5f;
+
+        // Detectar enemigos en la hitbox
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        //foreach (Collider2D enemy in hitEnemies)
+        //{
+        //    enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+        //}
+
+        yield return new WaitForSeconds(attackCooldown);
+        isAttacking = false;
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null) return;
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+
+
+    }
+
     IEnumerator DeactivateHitbox(BoxCollider2D hitbox)
     {
         yield return new WaitForSeconds(hitboxDuration);
         hitbox.gameObject.SetActive(false);
 
     }
+
+    void ReiniciarNivel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reinicia el nivel
+    }
+
+
 }
