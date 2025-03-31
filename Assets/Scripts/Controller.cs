@@ -12,8 +12,6 @@ public class ControllerCharacter : MonoBehaviour
     [SerializeField]
     private Rigidbody2D playerRB;
 
-    public float attackRange = 0.5f;
-    public int attackDamage = 10;
     public float attackCooldown = 0.3f;
 
     public BoxCollider2D HitboxRight;
