@@ -31,6 +31,10 @@ public class ControllerCharacter : MonoBehaviour
 
     void Update()
     {
+        if (PauseMenu.GameIsPaused)
+        {
+            return;
+        }
 
         if (Input.GetKey(KeyCode.D))
         {
