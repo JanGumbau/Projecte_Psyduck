@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ControllerCharacter : MonoBehaviour
 {
@@ -112,6 +113,11 @@ public class ControllerCharacter : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("PINCHOS") || collision.gameObject.CompareTag("ENEMIC"))
+            ReiniciarNivel();
+    }
 
     IEnumerator PerformAttack()
     {
@@ -152,4 +158,11 @@ public class ControllerCharacter : MonoBehaviour
         hitbox.gameObject.SetActive(false);
 
     }
+
+    void ReiniciarNivel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reinicia el nivel
+    }
+
+
 }
