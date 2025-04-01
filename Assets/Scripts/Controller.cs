@@ -21,6 +21,9 @@ public class ControllerCharacter : MonoBehaviour
 
     public float hitboxDuration = 0.2f; // Tiempo de duración de la hitbox
 
+    public float raycastDistance = 0.1f;
+    public LayerMask groundLayer;
+
     void Start()
     {
         if (playerRB != null)
@@ -88,42 +91,45 @@ public class ControllerCharacter : MonoBehaviour
             StartCoroutine(DeactivateHitbox(HitboxDown));
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             ReiniciarNivel();
         }
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, groundLayer);
+        canJump = hit.collider != null;
     }
 
     void FixedUpdate()
     {
         playerRB.velocity = new Vector2(xDirection * velocity, playerRB.velocity.y);
     }
-
-    void OnCollisionStay2D(Collision2D collision)
+    void OnDrawGizmos()
     {
-        if (collision.gameObject.CompareTag("GROUND"))
-        {
-            canJump = true;
-        }
+    Gizmos.color = Color.red;
+    Gizmos.DrawLine(transform.position, transform.position + Vector3.down * raycastDistance);
     }
 
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("GROUND"))
-        {
-            canJump = false;
-        }
-    }
+//void OnCollisionStay2D(Collision2D collision)
+//{
+//    if (collision.gameObject.CompareTag("GROUND"))
+//    {
+//        canJump = true;
+//    }
+//}
+
+//void OnCollisionExit2D(Collision2D collision)
+//{
+//    if (collision.gameObject.CompareTag("GROUND"))
+//    {
+//        canJump = false;
+//    }
+//}
     void OnCollisionEnter2D(Collision2D collision)
-
     {
-
         if (collision.gameObject.CompareTag("PINCHOS") || collision.gameObject.CompareTag("ENEMIC"))
-
             ReiniciarNivel();
-
     }
-
 
     IEnumerator DeactivateHitbox(BoxCollider2D hitbox)
     {
@@ -132,12 +138,7 @@ public class ControllerCharacter : MonoBehaviour
 
     }
     void ReiniciarNivel()
-
     {
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reinicia el nivel
-
     }
-
-
 }
