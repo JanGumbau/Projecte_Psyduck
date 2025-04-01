@@ -24,11 +24,14 @@ public class ControllerCharacter : MonoBehaviour
     public float raycastDistance = 0.1f;
     public LayerMask groundLayer;
 
+    private SpriteRenderer spriteRenderer;
+
     void Start()
     {
         if (playerRB != null)
         {
             playerRB = GetComponent<Rigidbody2D>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
         }
     }
 
@@ -42,12 +45,12 @@ public class ControllerCharacter : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             xDirection = 1;
-            transform.localScale = new Vector3(1, 1, 1);
+            spriteRenderer.flipX = false;
         }
         else if (Input.GetKey(KeyCode.A))
         {
             xDirection = -1;
-            transform.localScale = new Vector3(-1, 1, 1);
+            spriteRenderer.flipX = true;
         }
         else
         {

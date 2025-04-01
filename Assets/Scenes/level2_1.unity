@@ -215,6 +215,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9131839779750296252, guid: 293ea2041a876094cb591d93818fe63d, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 735e2fe91a6d7c2478ffa54e2b7be957, type: 2}
     - target: {fileID: 353251017906994892, guid: 293ea2041a876094cb591d93818fe63d, type: 3}
       propertyPath: m_Name
       value: Ground (3)
@@ -1371,6 +1375,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9131839779750296252, guid: 293ea2041a876094cb591d93818fe63d, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 735e2fe91a6d7c2478ffa54e2b7be957, type: 2}
     - target: {fileID: 353251017906994892, guid: 293ea2041a876094cb591d93818fe63d, type: 3}
       propertyPath: m_Name
       value: Ground (4)
@@ -2167,6 +2175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 1060333626}
+  controller: {fileID: 0}
 --- !u!4 &874035339
 Transform:
   m_ObjectHideFlags: 0
@@ -2785,6 +2794,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9131839779750296252, guid: 293ea2041a876094cb591d93818fe63d, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 735e2fe91a6d7c2478ffa54e2b7be957, type: 2}
     - target: {fileID: 353251017906994892, guid: 293ea2041a876094cb591d93818fe63d, type: 3}
       propertyPath: m_Name
       value: Ground (2)

@@ -21,7 +21,7 @@ public class Hitbox : MonoBehaviour
                 Rigidbody2D enemyRB = collision.GetComponent<Rigidbody2D>();
                 if (enemyRB != null)
                 {
-                    Debug.Log("Hit");
+                    Debug.Log("Hit by: " + gameObject.name + "ForceX: " + hitboxforce.x + "ForceY: " + hitboxforce.y);
                     enemyRB.AddForce(hitboxforce, ForceMode2D.Impulse);
                 }
 
