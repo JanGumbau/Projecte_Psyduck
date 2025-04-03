@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: -1385868621409065365}
   - component: {fileID: -6556120571682302072}
   - component: {fileID: 2900092458381433420}
-  - component: {fileID: 5981092096802982533}
   - component: {fileID: 8623775481687553439}
   m_Layer: 0
   m_Name: Character
@@ -39,7 +38,7 @@ Transform:
   - {fileID: 273197445847831410}
   - {fileID: 8284284196727767876}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2426068100868452305
 SpriteRenderer:
@@ -186,19 +185,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5981092096802982533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259561167087253305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f27a1a1672a60b54bb33189dcb8911b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitboxforce: {x: 5, y: 0}
 --- !u!114 &8623775481687553439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,6 +207,10 @@ MonoBehaviour:
   HitboxUp: {fileID: 4047862844153595127}
   HitboxDown: {fileID: 4728361095437849035}
   hitboxDuration: 0.2
+  raycastDistance: 0.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1800469886869362194
 GameObject:
   m_ObjectHideFlags: 0
