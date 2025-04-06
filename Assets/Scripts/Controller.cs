@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 public class ControllerCharacter : MonoBehaviour
 {
     public bool canJump = false;
+    public bool Pogo = false;
     public float Impuls = 5f;
+    public float PogoImpuls = 5f;
     public float velocity = 5f;
     private int xDirection = 0;
     [SerializeField]
@@ -88,19 +90,28 @@ public class ControllerCharacter : MonoBehaviour
         }
 
         // Activación de la hitbox de abajo
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow) )
         {
+            
+           
             HitboxDown.gameObject.SetActive(true);
             StartCoroutine(DeactivateHitbox(HitboxDown));
+
+            
+            
+        }
+        if (Pogo)
+        {
+            playerRB.AddForce(Vector3.up * Impuls);
+            Pogo = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ReiniciarNivel();
-        }
+
+      
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, groundLayer);
         canJump = hit.collider != null;
+        
     }
 
     void FixedUpdate()
@@ -130,6 +141,8 @@ public class ControllerCharacter : MonoBehaviour
 //}
     void OnCollisionEnter2D(Collision2D collision)
     {
+        
+
         if (collision.gameObject.CompareTag("PINCHOS") || collision.gameObject.CompareTag("ENEMIC"))
             ReiniciarNivel();
     }
@@ -143,5 +156,17 @@ public class ControllerCharacter : MonoBehaviour
     void ReiniciarNivel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reinicia el nivel
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        // Comprova si col·lisiona amb un enemic quan ataca avall
+        if (other.gameObject.CompareTag("ENEMIC") && HitboxDown.gameObject.activeSelf)
+        {
+            // Realitza el Pogo: afegeix l'impuls cap amunt
+            
+            playerRB.velocity = new Vector2(playerRB.velocity.x, 0); // Reseteja la velocitat vertical
+            playerRB.AddForce(Vector2.up * PogoImpuls);
+        }
     }
 }
