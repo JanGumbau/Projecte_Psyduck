@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void OnCollisionEnter2D(Collision2D collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Comprova si el collider té el tag "Ground" o "Spikes"
+        if (collision.collider.CompareTag("GROUND") || collision.collider.CompareTag("PINCHOS") || collision.collider.CompareTag("ENEMIC"))
+        {
+            
+            Destroy(gameObject);
+        }
     }
 }
