@@ -346,7 +346,6 @@ GameObject:
   - component: {fileID: 133333925}
   - component: {fileID: 133333924}
   - component: {fileID: 133333923}
-  - component: {fileID: 133333927}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -438,18 +437,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &133333927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 133333922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f174855a2d593e4e95bf22d26059f55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &190237883 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1413390902351998499, guid: bb8a3072a4e1ae44a95f294b80f00dd0, type: 3}
@@ -527,18 +514,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &190237890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 190237883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f174855a2d593e4e95bf22d26059f55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &190237891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2112,9 +2087,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1413390902351998499, guid: bb8a3072a4e1ae44a95f294b80f00dd0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1862924983}
-    - targetCorrespondingSourceObject: {fileID: 1413390902351998499, guid: bb8a3072a4e1ae44a95f294b80f00dd0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1862924982}
     - targetCorrespondingSourceObject: {fileID: 1413390902351998499, guid: bb8a3072a4e1ae44a95f294b80f00dd0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1862924981}
@@ -4065,18 +4037,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2650a9394f2b9247a846fdc978c1aa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1862924982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1862924980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f174855a2d593e4e95bf22d26059f55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &1862924983
 Rigidbody2D:
   serializedVersion: 4
@@ -4805,9 +4765,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1413390902351998499, guid: bb8a3072a4e1ae44a95f294b80f00dd0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 190237887}
-    - targetCorrespondingSourceObject: {fileID: 1413390902351998499, guid: bb8a3072a4e1ae44a95f294b80f00dd0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 190237890}
     - targetCorrespondingSourceObject: {fileID: 1413390902351998499, guid: bb8a3072a4e1ae44a95f294b80f00dd0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 190237891}
