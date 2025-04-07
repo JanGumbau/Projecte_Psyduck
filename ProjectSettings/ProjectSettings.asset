@@ -669,11 +669,11 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: Projecte_Psyduck
   metroPackageVersion: 
-  metroCertificatePath: 
+  metroCertificatePath: Assets/WSATestCertificate.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
+  metroCertificateSubject: DefaultCompany
+  metroCertificateIssuer: DefaultCompany
+  metroCertificateNotAfter: 0012e465b8c6dc01
   metroApplicationDescription: Projecte_Psyduck
   wsaImages: {}
   metroTileShortName: 
