@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class ControllerCharacter : MonoBehaviour
 {
-    public bool canJump = false;
+    
     public bool Pogo = false;
-    public float Impuls = 5f;
+    private float Impuls = 5f;
     public float PogoImpuls = 5f;
     public float velocity = 5f;
     private int xDirection = 0;
@@ -59,12 +59,7 @@ public class ControllerCharacter : MonoBehaviour
             xDirection = 0;
         }
 
-        // Salto
-        if (Input.GetKeyDown(KeyCode.W) && canJump)
-        {
-            playerRB.AddForce(Vector3.up * Impuls);
-            canJump = false;
-        }
+       
 
         //Atac
         // Activación de la hitbox derecha
@@ -110,7 +105,7 @@ public class ControllerCharacter : MonoBehaviour
       
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, groundLayer);
-        canJump = hit.collider != null;
+        
         
     }
 
