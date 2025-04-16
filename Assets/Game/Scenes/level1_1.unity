@@ -173,6 +173,35 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.96027756, y: 0.056946754}
   m_EdgeRadius: 0
+--- !u!114 &22947532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 22947504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ada301d37aa9e469033590cae165f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Impuls: 7
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  fallMultiplier: 6.5
+  holdForce: 2
+  maxHoldTime: 0.2
+  rb: {fileID: 22947536}
+  canJump: 1
+  jumpTime: 0
+  jumpMultiplier: 0
+  isGrounded: 0
+--- !u!50 &22947536 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: -1385868621409065365, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
+  m_PrefabInstance: {fileID: 346187221}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &122979181
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -822,7 +851,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8623775481687553439, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
       propertyPath: PogoImpuls
-      value: 371
+      value: 330
       objectReference: {fileID: 0}
     - target: {fileID: 8623775481687553439, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
       propertyPath: raycastDistance
@@ -839,6 +868,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 259561167087253305, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
       insertIndex: 4
       addedObject: {fileID: 22947531}
+    - targetCorrespondingSourceObject: {fileID: 259561167087253305, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 22947532}
   m_SourcePrefab: {fileID: 100100000, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
 --- !u!1 &527946079
 GameObject:
