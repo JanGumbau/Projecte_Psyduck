@@ -136,9 +136,7 @@ public class ControllerCharacter : MonoBehaviour
 //}
     void OnCollisionEnter2D(Collision2D collision)
     {
-        
-
-        if (collision.gameObject.CompareTag("PINCHOS") || collision.gameObject.CompareTag("ENEMIC"))
+            if (collision.gameObject.CompareTag("PINCHOS") || collision.gameObject.CompareTag("ENEMIC"))
             ReiniciarNivel();
     }
 
@@ -162,6 +160,10 @@ public class ControllerCharacter : MonoBehaviour
             
             playerRB.velocity = new Vector2(playerRB.velocity.x, 0); // Reseteja la velocitat vertical
             playerRB.AddForce(Vector2.up * PogoImpuls);
+        }
+        if (other.CompareTag("RedSlime"))
+        {
+            other.GetComponent<RedSlime>().TakeDamage(999, gameObject);
         }
     }
 }

@@ -9,7 +9,6 @@ public class EnemyManager : MonoBehaviour
         // Comprova si el collider té el tag "Ground" o "Spikes"
         if (collision.collider.CompareTag("GROUND") || collision.collider.CompareTag("PINCHOS") || collision.collider.CompareTag("ENEMIC"))
         {
-            
             Destroy(gameObject);
         }
     }
