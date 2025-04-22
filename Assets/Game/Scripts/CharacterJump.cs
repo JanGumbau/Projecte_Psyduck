@@ -13,7 +13,7 @@ public class CharacterJump : MonoBehaviour
 
     private float holdTimer = 0f;
     private float currentJumpTime = 0f;
-   public Rigidbody2D rb;
+    public Rigidbody2D rb;
     private bool isHoldingJump = false;
     private bool isJumping = false;
     private bool isGrounded = false;

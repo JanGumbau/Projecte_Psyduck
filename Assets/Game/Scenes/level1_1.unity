@@ -185,13 +185,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76ada301d37aa9e469033590cae165f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Impuls: 7
+  Impuls: 9
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  fallMultiplier: 6.5
-  holdForce: 2
-  maxHoldTime: 0.2
+  fallMultiplier: 1.9
+  holdForce: 6.5
+  maxHoldTime: 0.15
   raycastDistance: 0.5
   rb: {fileID: 22947536}
 --- !u!50 &22947536 stripped
@@ -776,7 +776,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -1385868621409065365, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
       propertyPath: m_GravityScale
-      value: 0.7
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 259561167087253305, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
       propertyPath: m_Name
@@ -844,11 +844,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8623775481687553439, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
       propertyPath: velocity
-      value: 5.7
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8623775481687553439, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
       propertyPath: PogoImpuls
-      value: 330
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 8623775481687553439, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
       propertyPath: raycastDistance
