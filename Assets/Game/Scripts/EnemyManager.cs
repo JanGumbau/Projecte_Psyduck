@@ -3,14 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
+
 {
-    public void OnCollisionEnter2D(Collision2D collision)
+    public int enemiesCount = 0;
+    public int enemiesDestroyed = 0;
+    
+    private static EnemyManager instance;
+    public static EnemyManager Instance
     {
-        // Comprova si el collider té el tag "Ground" o "Spikes"
-        if (collision.collider.CompareTag("GROUND") || collision.collider.CompareTag("PINCHOS") || collision.collider.CompareTag("ENEMIC"))
+        get
         {
-            
-            Destroy(gameObject);
+            if (instance == null)
+            {
+                instance = FindObjectOfType<EnemyManager>();
+                if (instance == null)
+                {
+                    GameObject singletonObject = new GameObject("EnemyManager");
+                    instance = singletonObject.AddComponent<EnemyManager>();
+                    DontDestroyOnLoad(singletonObject);
+                }
+            }
+            return instance;
         }
     }
+    public bool AreAllEnemiesDestroyed()
+    {
+        return enemiesCount == enemiesDestroyed;
+    } 
+   
 }
