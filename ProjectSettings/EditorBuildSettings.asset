@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Scenes/level_explosivos.unity
     guid: a5c6bceec4314e641889917bab0f3058
+  - enabled: 1
+    path: Assets/Game/Scenes/level_pushing.unity
+    guid: c5a33f3b78aebe04290f3d9618338e55
   m_configObjects: {}
