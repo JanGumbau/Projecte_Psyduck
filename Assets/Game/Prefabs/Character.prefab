@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -6556120571682302072}
   - component: {fileID: 2900092458381433420}
   - component: {fileID: 8623775481687553439}
+  - component: {fileID: 3252854531750711390}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -197,12 +198,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3663dd7ed515a024fa9785d018f45604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canJump: 0
   Pogo: 0
-  Impuls: 400
   PogoImpuls: 5
   velocity: 5
-  playerRB: {fileID: -1385868621409065365}
+  playerRB: {fileID: 0}
   attackCooldown: 0.3
   HitboxRight: {fileID: 1507829300819899403}
   HitboxLeft: {fileID: 1808225213935697394}
@@ -213,6 +212,27 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+--- !u!114 &3252854531750711390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259561167087253305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ada301d37aa9e469033590cae165f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Impuls: 7
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  fallMultiplier: 5.8
+  holdForce: 0.86
+  maxHoldTime: 0.5
+  raycastDistance: 0.1
+  rb: {fileID: 0}
 --- !u!1 &1800469886869362194
 GameObject:
   m_ObjectHideFlags: 0
