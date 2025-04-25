@@ -9,12 +9,12 @@ public class CharacterJump : MonoBehaviour
     [SerializeField] private float fallMultiplier = 5.8f;
     [SerializeField] private float holdForce = 0.86f;
     [SerializeField] private float maxHoldTime = 0.5f;
-    [SerializeField] private float raycastDistance = 0.1f; // Distància del raycast per detectar el terra
+    [SerializeField] private float raycastDistance = 0.1f; // Distï¿½ncia del raycast per detectar el terra
 
     private float holdTimer = 0f;
-    private float currentJumpTime = 0f;
+    
     public Rigidbody2D rb;
-    private bool isHoldingJump = false;
+  
     private bool isJumping = false;
     private bool isGrounded = false;
     private bool canJump = false;
@@ -26,8 +26,8 @@ public class CharacterJump : MonoBehaviour
 
     void Update()
     {
-        // Detectar si el jugador està tocant el terra amb un Raycast
-        Vector2 raycastOrigin = new Vector2(transform.position.x, transform.position.y - 0.5f); // Llançar el Raycast des d'una posició lleugerament inferior
+        // Detectar si el jugador estï¿½ tocant el terra amb un Raycast
+        Vector2 raycastOrigin = new Vector2(transform.position.x, transform.position.y - 0.5f); // Llanï¿½ar el Raycast des d'una posiciï¿½ lleugerament inferior
         RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, Vector2.down, raycastDistance, groundLayer);
 
         // Actualitzar l'estat de isGrounded basant-nos en el Raycast
@@ -39,11 +39,11 @@ public class CharacterJump : MonoBehaviour
         {
             canJump = true;
             isJumping = false;
-            isHoldingJump = false;
+            
         }
         else
         {
-            canJump = false; // Assegurar que no es pot saltar si no està tocat el terra
+            canJump = false; // Assegurar que no es pot saltar si no estï¿½ tocat el terra
         }
 
         if (Input.GetKey(KeyCode.W) && canJump)
@@ -72,7 +72,7 @@ public class CharacterJump : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        // Dibuixar el Raycast al Scene View per depuració
+        // Dibuixar el Raycast al Scene View per depuraciï¿½
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * raycastDistance);
 
