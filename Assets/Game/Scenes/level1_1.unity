@@ -960,7 +960,7 @@ PrefabInstance:
       objectReference: {fileID: 22947536}
     - target: {fileID: 3252854531750711390, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
       propertyPath: Impuls
-      value: 9
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3252854531750711390, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
       propertyPath: holdForce
