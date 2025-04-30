@@ -4749,7 +4749,7 @@ PrefabInstance:
       objectReference: {fileID: 851456338}
     - target: {fileID: 3252854531750711390, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
       propertyPath: Impuls
-      value: 11
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3252854531750711390, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
       propertyPath: holdForce
