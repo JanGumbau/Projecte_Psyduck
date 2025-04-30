@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class CharacterJump : MonoBehaviour
 {
-    [SerializeField] private float Impuls = 7f;
+    [SerializeField] private float Impuls = 0f;
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private float fallMultiplier = 5.8f;
-    [SerializeField] private float holdForce = 0.86f;
-    [SerializeField] private float maxHoldTime = 0.5f;
-    [SerializeField] private float raycastDistance = 0.1f; // Dist�ncia del raycast per detectar el terra
+    [SerializeField] private float fallMultiplier = 0f;
+    [SerializeField] private float holdForce = 0f;
+    [SerializeField] private float maxHoldTime = 0f;
+    [SerializeField] private float raycastDistance = 0f; // Dist�ncia del raycast per detectar el terra
 
     private float holdTimer = 0f;
     
