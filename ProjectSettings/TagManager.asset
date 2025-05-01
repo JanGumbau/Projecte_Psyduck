@@ -7,6 +7,8 @@ TagManager:
   - GROUND
   - PINCHOS
   - ENEMIC
+  - Portal
+  - TextoCronoUI
   layers:
   - Default
   - TransparentFX
