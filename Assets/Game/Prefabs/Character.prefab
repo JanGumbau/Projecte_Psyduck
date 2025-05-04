@@ -224,14 +224,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76ada301d37aa9e469033590cae165f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Impuls: 7
+  Impuls: 9
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
-  fallMultiplier: 5.8
-  holdForce: 0.86
-  maxHoldTime: 0.5
-  raycastDistance: 0.1
+  fallMultiplier: 2
+  holdForce: 6
+  maxHoldTime: 0.15
+  raycastDistance: 0.5
   rb: {fileID: 0}
 --- !u!1 &1800469886869362194
 GameObject:
