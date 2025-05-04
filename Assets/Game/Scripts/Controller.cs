@@ -97,6 +97,7 @@ public class ControllerCharacter : MonoBehaviour
         }
         if (Pogo)
         {
+            playerRB.velocity = new Vector2(playerRB.velocity.x, 0); // Resetear la velocidad en Y
             playerRB.AddForce(Vector3.up * Impuls);
             Pogo = false;
         }
