@@ -206,7 +206,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 13214900}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1150640319}
+        m_TargetAssemblyTypeName: SelectorLevel, Assembly-CSharp
+        m_MethodName: CambiarNivel
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: level_4
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &13214900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1268,7 +1280,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1062425384}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1150640319}
+        m_TargetAssemblyTypeName: SelectorLevel, Assembly-CSharp
+        m_MethodName: CambiarNivel
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: level_5
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1062425384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2046,7 +2070,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: level_x
+          m_StringArgument: level_3
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1761693246
@@ -2182,7 +2206,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1860458797}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1150640319}
+        m_TargetAssemblyTypeName: SelectorLevel, Assembly-CSharp
+        m_MethodName: CambiarNivel
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: level_4_!
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1860458797
 MonoBehaviour:
   m_ObjectHideFlags: 0
