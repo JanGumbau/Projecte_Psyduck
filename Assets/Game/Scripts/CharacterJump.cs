@@ -17,19 +17,30 @@ public class CharacterJump : MonoBehaviour
     public bool jumpPressed = false;
     public bool jumpReleased = false; // Nova variable per detectar si el botó s'ha deixat anar
 
+    private Collider2D col; // Per obtenir les dimensions del personatge
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<Collider2D>(); // Obtenir el Collider2D del personatge
+
     }
 
     void Update()
     {
-        // Detectar si el jugador està tocant el terra amb un Raycast
-        Vector2 raycastOrigin = new Vector2(transform.position.x, transform.position.y - 0.5f);
-        RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, Vector2.down, raycastDistance, groundLayer);
+        // Calcular les posicions dels extrems esquerre i dret del personatge
+        Vector2 leftRaycastOrigin = new Vector2(transform.position.x - col.bounds.extents.x, transform.position.y);
+        Vector2 rightRaycastOrigin = new Vector2(transform.position.x + col.bounds.extents.x, transform.position.y);
 
-        // Actualitzar l'estat de isGrounded basant-nos en el Raycast
-        isGrounded = hit.collider != null;
+        // Llançar els Raycasts des dels extrems
+        RaycastHit2D leftHit = Physics2D.Raycast(leftRaycastOrigin, Vector2.down, raycastDistance, groundLayer);
+        RaycastHit2D rightHit = Physics2D.Raycast(rightRaycastOrigin, Vector2.down, raycastDistance, groundLayer);
+
+        // Actualitzar l'estat de isGrounded basant-nos en els Raycasts
+        isGrounded = leftHit.collider != null || rightHit.collider != null;
+
+
 
         if (isGrounded)
         {
@@ -84,7 +95,16 @@ public class CharacterJump : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * raycastDistance);
+        if (col != null)
+        {
+            // Calcular les posicions dels extrems esquerre i dret del personatge
+            Vector2 leftRaycastOrigin = new Vector2(transform.position.x - col.bounds.extents.x, transform.position.y);
+            Vector2 rightRaycastOrigin = new Vector2(transform.position.x + col.bounds.extents.x, transform.position.y);
+
+            // Dibuixar els Raycasts al Scene View per depuració
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(leftRaycastOrigin, leftRaycastOrigin + Vector2.down * raycastDistance);
+            Gizmos.DrawLine(rightRaycastOrigin, rightRaycastOrigin + Vector2.down * raycastDistance);
+        }
     }
 }

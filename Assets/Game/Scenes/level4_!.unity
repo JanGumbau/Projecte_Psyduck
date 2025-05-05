@@ -4283,7 +4283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3252854531750711390, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
       propertyPath: raycastDistance
-      value: 0.5
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 3252854531750711390, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
       propertyPath: groundLayer.m_Bits
@@ -4319,7 +4319,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8623775481687553439, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
       propertyPath: raycastDistance
-      value: 1.57
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8623775481687553439, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
       propertyPath: groundLayer.m_Bits
