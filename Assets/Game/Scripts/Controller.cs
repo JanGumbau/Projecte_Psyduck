@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class ControllerCharacter : MonoBehaviour
 {
-    
     public bool Pogo = false;
     private float Impuls = 5f;
     public float PogoImpuls = 5f;
@@ -27,6 +26,9 @@ public class ControllerCharacter : MonoBehaviour
     public LayerMask groundLayer;
 
     private SpriteRenderer spriteRenderer;
+    private Animator animator; // Referencia al Animator
+
+    private bool isAttacking = false; // Control del estado de ataque
 
     void Start()
     {
@@ -35,6 +37,8 @@ public class ControllerCharacter : MonoBehaviour
             playerRB = GetComponent<Rigidbody2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
+
+        animator = GetComponent<Animator>(); // Inicializar el Animator
     }
 
     void Update()
@@ -59,42 +63,13 @@ public class ControllerCharacter : MonoBehaviour
             xDirection = 0;
         }
 
-       
-
-        //Atac
-        // Activación de la hitbox derecha
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        // Ataque
+        if (!isAttacking && (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow) ||
+            Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)))
         {
-            HitboxRight.gameObject.SetActive(true);
-            StartCoroutine(DeactivateHitbox(HitboxRight));
+            StartCoroutine(HandleAttack());
         }
 
-        // Activación de la hitbox izquierda
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            HitboxLeft.gameObject.SetActive(true);
-            StartCoroutine(DeactivateHitbox(HitboxLeft));
-
-        }
-
-        // Activación de la hitbox de arriba
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            HitboxUp.gameObject.SetActive(true);
-            StartCoroutine(DeactivateHitbox(HitboxUp));
-        }
-
-        // Activación de la hitbox de abajo
-        if (Input.GetKeyDown(KeyCode.DownArrow) )
-        {
-            
-           
-            HitboxDown.gameObject.SetActive(true);
-            StartCoroutine(DeactivateHitbox(HitboxDown));
-
-            
-            
-        }
         if (Pogo)
         {
             playerRB.velocity = new Vector2(playerRB.velocity.x, 0); // Resetear la velocidad en Y
@@ -102,53 +77,67 @@ public class ControllerCharacter : MonoBehaviour
             Pogo = false;
         }
 
-
-      
-
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, groundLayer);
-        
-        
     }
 
     void FixedUpdate()
     {
         playerRB.velocity = new Vector2(xDirection * velocity, playerRB.velocity.y);
     }
+
     void OnDrawGizmos()
     {
-    Gizmos.color = Color.red;
-    Gizmos.DrawLine(transform.position, transform.position + Vector3.down * raycastDistance);
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * raycastDistance);
     }
 
-//void OnCollisionStay2D(Collision2D collision)
-//{
-//    if (collision.gameObject.CompareTag("GROUND"))
-//    {
-//        canJump = true;
-//    }
-//}
-
-//void OnCollisionExit2D(Collision2D collision)
-//{
-//    if (collision.gameObject.CompareTag("GROUND"))
-//    {
-//        canJump = false;
-//    }
-//}
     void OnCollisionEnter2D(Collision2D collision)
     {
-        
-
         if (collision.gameObject.CompareTag("PINCHOS") || collision.gameObject.CompareTag("ENEMIC"))
             ReiniciarNivel();
+    }
+
+    IEnumerator HandleAttack()
+    {
+        isAttacking = true;
+
+        // Activar la animación de ataque
+        animator.SetTrigger("isAttacking");
+
+        // Activar la hitbox correspondiente
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            HitboxRight.gameObject.SetActive(true);
+            StartCoroutine(DeactivateHitbox(HitboxRight));
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            HitboxLeft.gameObject.SetActive(true);
+            StartCoroutine(DeactivateHitbox(HitboxLeft));
+        }
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            HitboxUp.gameObject.SetActive(true);
+            StartCoroutine(DeactivateHitbox(HitboxUp));
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            HitboxDown.gameObject.SetActive(true);
+            StartCoroutine(DeactivateHitbox(HitboxDown));
+        }
+
+        // Esperar el tiempo de cooldown
+        yield return new WaitForSeconds(attackCooldown);
+
+        isAttacking = false;
     }
 
     IEnumerator DeactivateHitbox(BoxCollider2D hitbox)
     {
         yield return new WaitForSeconds(hitboxDuration);
         hitbox.gameObject.SetActive(false);
-
     }
+
     void ReiniciarNivel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reinicia el nivel
@@ -160,7 +149,6 @@ public class ControllerCharacter : MonoBehaviour
         if (other.gameObject.CompareTag("ENEMIC") && HitboxDown.gameObject.activeSelf)
         {
             // Realitza el Pogo: afegeix l'impuls cap amunt
-            
             playerRB.velocity = new Vector2(playerRB.velocity.x, 0); // Reseteja la velocitat vertical
             playerRB.AddForce(Vector2.up * PogoImpuls);
         }
