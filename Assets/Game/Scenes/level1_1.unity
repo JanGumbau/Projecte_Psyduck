@@ -178,6 +178,18 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: -1385868621409065365, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
   m_PrefabInstance: {fileID: 346187221}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &22947543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 22947504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7492bfaf9ceef8a4f83b32dae68eedab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &122979181
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -456,6 +468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tiempo: 0
+  cronometroActivo: 1
 --- !u!1 &190237883 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1413390902351998499, guid: bb8a3072a4e1ae44a95f294b80f00dd0, type: 3}
@@ -588,7 +601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.09411766, g: 0.09019608, b: 0.08627451, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1311,6 +1324,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 259561167087253305, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
       insertIndex: 4
       addedObject: {fileID: 22947531}
+    - targetCorrespondingSourceObject: {fileID: 259561167087253305, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 22947543}
   m_SourcePrefab: {fileID: 100100000, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
 --- !u!1 &527946079
 GameObject:
@@ -2003,6 +2019,7 @@ GameObject:
   - component: {fileID: 828378457}
   - component: {fileID: 828378456}
   - component: {fileID: 828378459}
+  - component: {fileID: 828378460}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2108,6 +2125,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tiempo: 0
+  cronometroActivo: 1
+--- !u!114 &828378460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828378454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc06edcfc86ab6642bbf41c835aa386a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Menuwin: {fileID: 197261028}
 --- !u!1 &828560540
 GameObject:
   m_ObjectHideFlags: 0
@@ -3633,7 +3664,7 @@ GameObject:
   - component: {fileID: 1671934462}
   m_Layer: 0
   m_Name: Portal
-  m_TagString: Untagged
+  m_TagString: Portal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

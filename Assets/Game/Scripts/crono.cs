@@ -1,42 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class crono : MonoBehaviour
+public class Timer:MonoBehaviour
 {
-    private TextMeshProUGUI textoCrono;
-    [SerializeField] private float tiempo = 0;
 
-    private int tiempoMinuto = 0;
-    private int tiempoDecimasSegundo = 0;
-    private int tiemposegundos = 0;
+    [SerializeField] private TMP_Text timerText;
 
-    void Start()
+
+    private float timeElapsed;
+    private int minutes, seconds, cents;
+
+    private void Update()
     {
-        textoCrono = GameObject.Find("TextoCronoUI").GetComponent<TextMeshProUGUI>();
-        if (textoCrono == null)
-        {
-            Debug.LogError("No se encontró el objeto TextoCronoUI con TextMeshProUGUI");
-        }
-    }
+        timeElapsed += Time.deltaTime;
+        minutes = (int)(timeElapsed / 60f);
+        seconds = (int)(timeElapsed - minutes * 60f);
+        cents = (int)((timeElapsed - (int)timeElapsed) *100f);
 
-    void Cronometro()
-    {
-        tiempo += Time.deltaTime;
+        timerText.text = string.Format("{0:00}:{1:00}:{2:00}",minutes,seconds,cents);
 
-        tiempoMinuto = Mathf.FloorToInt(tiempo / 60);
-        tiemposegundos = Mathf.FloorToInt(tiempo % 60);
-        tiempoDecimasSegundo = Mathf.FloorToInt((tiempo % 1) * 100);
+      
 
-        textoCrono.text = string.Format("{0:00}:{1:00}:{2:00}", tiempoMinuto, tiemposegundos, tiempoDecimasSegundo);
-    }
-
-    void Update()
-    {
-        if (textoCrono != null)
-        {
-            Cronometro();
-        }
     }
 }
