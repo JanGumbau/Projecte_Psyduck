@@ -37,6 +37,13 @@ public class Animations : MonoBehaviour
             Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             animator.SetTrigger("isAttacking");
+            StartCoroutine(ResetIsAttackingAfterDelay(0.0001f)); // Llama a la corrutina para reiniciar isAttacking
         }
+    }
+
+    private IEnumerator ResetIsAttackingAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay); // Espera el tiempo especificado
+        animator.SetBool("isAttacking", false); // Reinicia isAttacking a false
     }
 }
