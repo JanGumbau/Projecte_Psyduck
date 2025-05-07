@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2900092458381433420}
   - component: {fileID: 8623775481687553439}
   - component: {fileID: 3252854531750711390}
+  - component: {fileID: 8653186901028195590}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -208,7 +209,7 @@ MonoBehaviour:
   HitboxUp: {fileID: 4047862844153595127}
   HitboxDown: {fileID: 4728361095437849035}
   hitboxDuration: 0.2
-  raycastDistance: 0.1
+  raycastDistance: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -229,10 +230,25 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   fallMultiplier: 2
-  holdForce: 6
-  maxHoldTime: 0.15
-  raycastDistance: 0.5
+  raycastDistance: 1.1
   rb: {fileID: 0}
+  isJumping: 0
+  isGrounded: 0
+  canJump: 0
+  jumpPressed: 0
+  jumpReleased: 0
+--- !u!114 &8653186901028195590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259561167087253305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ad4d41859250ee41b4e478e0e017bea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1800469886869362194
 GameObject:
   m_ObjectHideFlags: 0
