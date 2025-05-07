@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -58,6 +58,12 @@ public class ControllerCharacter : MonoBehaviour
             xDirection = -1;
             spriteRenderer.flipX = true;
         }
+        else if (Input.GetKey(KeyCode.R))
+        {
+           ReiniciarNivel();
+        }
+       
+
         else
         {
             xDirection = 0;

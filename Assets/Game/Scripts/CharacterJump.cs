@@ -18,7 +18,7 @@ public class CharacterJump : MonoBehaviour
     public bool jumpReleased = false; // Nova variable per detectar si el botó s'ha deixat anar
     private Collider2D col; // Per obtenir les dimensions del personatge
 
-    private Collider2D col; // Per obtenir les dimensions del personatge
+    
 
 
     void Start()
