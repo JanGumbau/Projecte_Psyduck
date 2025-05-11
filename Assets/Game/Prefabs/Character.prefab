@@ -213,6 +213,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  footstompImpulse: 16
 --- !u!114 &3252854531750711390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,6 +232,7 @@ MonoBehaviour:
     m_Bits: 0
   fallMultiplier: 2
   raycastDistance: 1.1
+  soundEffect: {fileID: 0}
   rb: {fileID: 0}
   isJumping: 0
   isGrounded: 0

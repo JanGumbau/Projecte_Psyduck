@@ -30,6 +30,8 @@ public class ControllerCharacter : MonoBehaviour
 
     private bool isAttacking = false; // Control del estado de ataque
 
+    public float footstompImpulse = 10f;
+
     void Start()
     {
         if (playerRB != null)
@@ -99,11 +101,51 @@ public class ControllerCharacter : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("PINCHOS") || collision.gameObject.CompareTag("ENEMIC"))
+        // Si colisiona con pinchos, siempre reinicia el nivel
+        if (collision.gameObject.CompareTag("PINCHOS"))
+        {
             ReiniciarNivel();
+            return;
+        }
+
+        // Si colisiona con un enemigo
+        if (collision.gameObject.CompareTag("ENEMIC"))
+        {
+            // Comprobar si el jugador está cayendo sobre el enemigo
+            bool colisionDesdeArriba = false;
+
+            // Verificar todos los puntos de contacto
+            foreach (ContactPoint2D contacto in collision.contacts)
+            {
+                // La normal apunta hacia arriba (desde la perspectiva del enemigo)
+                if (contacto.normal.y > 0.5f)
+                {
+                    colisionDesdeArriba = true;
+                    break;
+                }
+            }
+
+            if (colisionDesdeArriba)
+            {
+                // Resetear la velocidad Y antes de aplicar la fuerza
+                Vector2 velocidadActual = GetComponent<Rigidbody2D>().velocity;
+                GetComponent<Rigidbody2D>().velocity = new Vector2(velocidadActual.x, 0f);
+
+                // Aplicar fuerza de rebote hacia arriba usando la variable pública
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, footstompImpulse), ForceMode2D.Impulse);
+
+                // Destruir al enemigo
+                Destroy(collision.gameObject);
+            }
+            else
+            {
+                // Colisión por otro lado - reiniciar nivel
+                ReiniciarNivel();
+            }
+        }
     }
 
-    IEnumerator HandleAttack()
+IEnumerator HandleAttack()
     {
         isAttacking = true;
 
