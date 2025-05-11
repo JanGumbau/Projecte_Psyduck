@@ -12,5 +12,5 @@ Controls:
   - Atac: "fletxes"
   - Pogo: Atac cap abaix a sobre d'un enemic
 
-Existeix un salt sobre els enemics per matarlos sense atacar, però no està a develop per diversos probles
+Existeix un salt sobre els enemics per matarlos sense atacar, però no està a develop per diversos problemes
 ho acabarem afegint després.
