@@ -435,7 +435,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 199150973}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 19b2ef55eac7d5948be2eeb351a3b85d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1989,6 +1989,10 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3252854531750711390, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
+      propertyPath: soundEffect
+      value: 
+      objectReference: {fileID: 8300000, guid: 6d9d8bedb6328a04f92909cfaa97ad82, type: 3}
+    - target: {fileID: 3252854531750711390, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
       propertyPath: fallMultiplier
       value: 2
       objectReference: {fileID: 0}
@@ -2915,7 +2919,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1307267341}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 19b2ef55eac7d5948be2eeb351a3b85d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -4176,7 +4180,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileSpriteIndex: 2
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -4405,12 +4409,12 @@ Tilemap:
   - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: 8717b50a38fe4a349858b404483e38a9, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 1
-    m_Data: {fileID: 1224928626, guid: 00eab268b269d564baa0fe2845e53bd0, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 1451648484, guid: 00eab268b269d564baa0fe2845e53bd0, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 1451648484, guid: 00eab268b269d564baa0fe2845e53bd0, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 1224928626, guid: 00eab268b269d564baa0fe2845e53bd0, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -876509365, guid: 00eab268b269d564baa0fe2845e53bd0, type: 3}
   - m_RefCount: 8

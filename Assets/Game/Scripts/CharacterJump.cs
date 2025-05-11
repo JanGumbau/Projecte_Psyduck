@@ -8,6 +8,8 @@ public class CharacterJump : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float fallMultiplier = 0f;
     [SerializeField] private float raycastDistance = 0f;
+    public AudioClip soundEffect; // Arrastra tu archivo de sonido aquí en el Inspector
+    private AudioSource audioSource;
 
     public Rigidbody2D rb;
 
@@ -15,16 +17,18 @@ public class CharacterJump : MonoBehaviour
     public bool isGrounded = false;
     public bool canJump = false;
     public bool jumpPressed = false;
-    public bool jumpReleased = false; // Nova variable per detectar si el botó s'ha deixat anar
-    private Collider2D col; // Per obtenir les dimensions del personatge
-
-    
-
+    public bool jumpReleased = false;
+    private Collider2D col;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        col = GetComponent<Collider2D>(); // Obtenir el Collider2D del personatge
+        col = GetComponent<Collider2D>();
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     void Update()
@@ -51,14 +55,14 @@ public class CharacterJump : MonoBehaviour
         }
 
         // Capturar l'entrada de salt
-        if (Input.GetKeyDown(KeyCode.W) && canJump)
+        if (Input.GetKeyDown(KeyCode.Space) && canJump)
         {
             jumpPressed = true;
-            jumpReleased = false; // Restablir l'estat de jumpReleased
+            jumpReleased = false;
         }
 
         // Detectar si el botó W es deixa anar
-        if (Input.GetKeyUp(KeyCode.W) && isJumping)
+        if (Input.GetKeyUp(KeyCode.Space) && isJumping)
         {
             jumpReleased = true;
         }
@@ -71,7 +75,17 @@ public class CharacterJump : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, Impuls);
             isJumping = true;
             isGrounded = false;
-            jumpPressed = false; // Restablir l'estat del botó de salt
+            jumpPressed = false;
+
+           
+            if (soundEffect != null)
+            {
+                audioSource.PlayOneShot(soundEffect);
+            }
+            else
+            {
+                Debug.LogWarning("No hay un AudioClip asignado para el efecto de sonido.");
+            }
         }
 
         // Reduir la força del salt si el botó es deixa anar ràpidament
@@ -79,9 +93,9 @@ public class CharacterJump : MonoBehaviour
         {
             if (rb.velocity.y > 0)
             {
-                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f); // Reduir la velocitat vertical
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
             }
-            jumpReleased = false; // Restablir l'estat de jumpReleased
+            jumpReleased = false;
         }
 
         // Aplicar multiplicador de caiguda
@@ -95,11 +109,9 @@ public class CharacterJump : MonoBehaviour
     {
         if (col != null)
         {
-            // Calcular les posicions dels extrems esquerre i dret del personatge
             Vector2 leftRaycastOrigin = new Vector2(transform.position.x - col.bounds.extents.x, transform.position.y);
             Vector2 rightRaycastOrigin = new Vector2(transform.position.x + col.bounds.extents.x, transform.position.y);
 
-            // Dibuixar els Raycasts al Scene View per depuració
             Gizmos.color = Color.red;
             Gizmos.DrawLine(leftRaycastOrigin, leftRaycastOrigin + Vector2.down * raycastDistance);
             Gizmos.DrawLine(rightRaycastOrigin, rightRaycastOrigin + Vector2.down * raycastDistance);
