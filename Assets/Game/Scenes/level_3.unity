@@ -351,7 +351,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 199150973}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 19b2ef55eac7d5948be2eeb351a3b85d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -542,6 +542,10 @@ PrefabInstance:
       propertyPath: maxHoldTime
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3252854531750711390, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
+      propertyPath: soundEffect
+      value: 
+      objectReference: {fileID: 8300000, guid: 6d9d8bedb6328a04f92909cfaa97ad82, type: 3}
     - target: {fileID: 3252854531750711390, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
       propertyPath: fallMultiplier
       value: 2
@@ -1347,7 +1351,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 670307048}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 51.963886, y: 75.54, z: 0}
+  m_LocalPosition: {x: 51.97, y: 75.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3211,7 +3215,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1307267341}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 19b2ef55eac7d5948be2eeb351a3b85d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
