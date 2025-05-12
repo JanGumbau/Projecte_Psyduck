@@ -55,14 +55,14 @@ public class CharacterJump : MonoBehaviour
         }
 
         // Capturar l'entrada de salt
-        if (Input.GetKeyDown(KeyCode.Space) && canJump)
+        if (Input.GetKeyDown(KeyCode.Space) && canJump || Input.GetKeyDown(KeyCode.W) && canJump)
         {
             jumpPressed = true;
             jumpReleased = false;
         }
 
         // Detectar si el botó W es deixa anar
-        if (Input.GetKeyUp(KeyCode.Space) && isJumping)
+        if (Input.GetKeyUp(KeyCode.Space) && isJumping || Input.GetKeyUp(KeyCode.W) && isJumping)
         {
             jumpReleased = true;
         }

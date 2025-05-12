@@ -30,6 +30,8 @@ public class ControllerCharacter : MonoBehaviour
 
     private bool isAttacking = false; // Control del estado de ataque
 
+    public float footstompImpulse = 10f;
+
     void Start()
     {
         if (playerRB != null)
@@ -76,12 +78,12 @@ public class ControllerCharacter : MonoBehaviour
             StartCoroutine(HandleAttack());
         }
 
-        if (Pogo)
-        {
-            playerRB.velocity = new Vector2(playerRB.velocity.x, 0); // Resetear la velocidad en Y
-            playerRB.AddForce(Vector3.up * Impuls);
-            Pogo = false;
-        }
+        //if (Pogo)
+        //{
+        //    playerRB.velocity = new Vector2(playerRB.velocity.x, 0); // Resetear la velocidad en Y
+        //    playerRB.AddForce(Vector3.up * Impuls);
+        //    Pogo = false;
+        //}
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, groundLayer);
     }
@@ -99,8 +101,50 @@ public class ControllerCharacter : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("PINCHOS") || collision.gameObject.CompareTag("ENEMIC"))
+        // Si colisiona con pinchos, siempre reinicia el nivel
+        if (collision.gameObject.CompareTag("PINCHOS"))
+        {
             ReiniciarNivel();
+            return;
+        }
+
+        // Si colisiona con un enemigo
+        if (collision.gameObject.CompareTag("ENEMIC"))
+        {
+            bool colisionDesdeArriba = false;
+
+            // Verificar todos los puntos de contacto
+            foreach (ContactPoint2D contacto in collision.contacts)
+            {
+                // La normal apunta hacia arriba (desde la perspectiva del enemigo)
+                if (contacto.normal.y > 0.5f)
+                {
+                    colisionDesdeArriba = true;
+                    break;
+                }
+            }
+
+            if (colisionDesdeArriba)
+            {
+                // ✅ Rebote del jugador hacia arriba de forma consistente
+                Rigidbody2D rbJugador = GetComponent<Rigidbody2D>();
+                rbJugador.velocity = Vector2.zero; // Reset completo
+                rbJugador.AddForce(Vector2.up * footstompImpulse, ForceMode2D.Impulse);
+
+                // ✅ Impulsar al enemigo solo en el eje Y (negativo)
+                Rigidbody2D rbEnemigo = collision.rigidbody;
+                if (rbEnemigo != null)
+                {
+                    float fuerzaHaciaAbajo = -13f; // Ajusta este valor según lo que quieras
+                    rbEnemigo.velocity = Vector2.zero; // Reset completo
+                    rbEnemigo.AddForce(Vector2.up * fuerzaHaciaAbajo, ForceMode2D.Impulse); // Solo eje Y negativo
+                }
+            }
+            else
+            {
+                ReiniciarNivel();
+            }
+        }
     }
 
     IEnumerator HandleAttack()
@@ -149,14 +193,14 @@ public class ControllerCharacter : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reinicia el nivel
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        // Comprova si col·lisiona amb un enemic quan ataca avall
-        if (other.gameObject.CompareTag("ENEMIC") && HitboxDown.gameObject.activeSelf)
-        {
-            // Realitza el Pogo: afegeix l'impuls cap amunt
-            playerRB.velocity = new Vector2(playerRB.velocity.x, 0); // Reseteja la velocitat vertical
-            playerRB.AddForce(Vector2.up * PogoImpuls);
-        }
-    }
+    //void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    // Comprova si col·lisiona amb un enemic quan ataca avall
+    //    if (other.gameObject.CompareTag("ENEMIC") && HitboxDown.gameObject.activeSelf)
+    //    {
+    //        // Realitza el Pogo: afegeix l'impuls cap amunt
+    //        playerRB.velocity = new Vector2(playerRB.velocity.x, 0); // Reseteja la velocitat vertical
+    //        playerRB.AddForce(Vector2.up * PogoImpuls);
+    //    }
+    //}
 }
