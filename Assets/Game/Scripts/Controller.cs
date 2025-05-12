@@ -78,12 +78,12 @@ public class ControllerCharacter : MonoBehaviour
             StartCoroutine(HandleAttack());
         }
 
-        if (Pogo)
-        {
-            playerRB.velocity = new Vector2(playerRB.velocity.x, 0); // Resetear la velocidad en Y
-            playerRB.AddForce(Vector3.up * Impuls);
-            Pogo = false;
-        }
+        //if (Pogo)
+        //{
+        //    playerRB.velocity = new Vector2(playerRB.velocity.x, 0); // Resetear la velocidad en Y
+        //    playerRB.AddForce(Vector3.up * Impuls);
+        //    Pogo = false;
+        //}
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, groundLayer);
     }
@@ -111,7 +111,6 @@ public class ControllerCharacter : MonoBehaviour
         // Si colisiona con un enemigo
         if (collision.gameObject.CompareTag("ENEMIC"))
         {
-            // Comprobar si el jugador está cayendo sobre el enemigo
             bool colisionDesdeArriba = false;
 
             // Verificar todos los puntos de contacto
@@ -127,25 +126,28 @@ public class ControllerCharacter : MonoBehaviour
 
             if (colisionDesdeArriba)
             {
-                // Resetear la velocidad Y antes de aplicar la fuerza
-                Vector2 velocidadActual = GetComponent<Rigidbody2D>().velocity;
-                GetComponent<Rigidbody2D>().velocity = new Vector2(velocidadActual.x, 0f);
+                // ✅ Rebote del jugador hacia arriba de forma consistente
+                Rigidbody2D rbJugador = GetComponent<Rigidbody2D>();
+                rbJugador.velocity = Vector2.zero; // Reset completo
+                rbJugador.AddForce(Vector2.up * footstompImpulse, ForceMode2D.Impulse);
 
-                // Aplicar fuerza de rebote hacia arriba usando la variable pública
-                GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, footstompImpulse), ForceMode2D.Impulse);
-
-                // Destruir al enemigo
-                Destroy(collision.gameObject);
+                // ✅ Impulsar al enemigo solo en el eje Y (negativo)
+                Rigidbody2D rbEnemigo = collision.rigidbody;
+                if (rbEnemigo != null)
+                {
+                    float fuerzaHaciaAbajo = -13f; // Ajusta este valor según lo que quieras
+                    rbEnemigo.velocity = Vector2.zero; // Reset completo
+                    rbEnemigo.AddForce(Vector2.up * fuerzaHaciaAbajo, ForceMode2D.Impulse); // Solo eje Y negativo
+                }
             }
             else
             {
-                // Colisión por otro lado - reiniciar nivel
                 ReiniciarNivel();
             }
         }
     }
 
-IEnumerator HandleAttack()
+    IEnumerator HandleAttack()
     {
         isAttacking = true;
 
@@ -191,14 +193,14 @@ IEnumerator HandleAttack()
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reinicia el nivel
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        // Comprova si col·lisiona amb un enemic quan ataca avall
-        if (other.gameObject.CompareTag("ENEMIC") && HitboxDown.gameObject.activeSelf)
-        {
-            // Realitza el Pogo: afegeix l'impuls cap amunt
-            playerRB.velocity = new Vector2(playerRB.velocity.x, 0); // Reseteja la velocitat vertical
-            playerRB.AddForce(Vector2.up * PogoImpuls);
-        }
-    }
+    //void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    // Comprova si col·lisiona amb un enemic quan ataca avall
+    //    if (other.gameObject.CompareTag("ENEMIC") && HitboxDown.gameObject.activeSelf)
+    //    {
+    //        // Realitza el Pogo: afegeix l'impuls cap amunt
+    //        playerRB.velocity = new Vector2(playerRB.velocity.x, 0); // Reseteja la velocitat vertical
+    //        playerRB.AddForce(Vector2.up * PogoImpuls);
+    //    }
+    //}
 }
