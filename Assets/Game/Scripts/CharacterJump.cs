@@ -8,7 +8,7 @@ public class CharacterJump : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float fallMultiplier = 0f;
     [SerializeField] private float raycastDistance = 0f;
-    public AudioClip soundEffect; // Arrastra tu archivo de sonido aquí en el Inspector
+    public AudioClip soundEffect;
     private AudioSource audioSource;
 
     public Rigidbody2D rb;
@@ -19,6 +19,8 @@ public class CharacterJump : MonoBehaviour
     public bool jumpPressed = false;
     public bool jumpReleased = false;
     private Collider2D col;
+
+    private bool allowExtraJump = false;
 
     void Start()
     {
@@ -33,36 +35,33 @@ public class CharacterJump : MonoBehaviour
 
     void Update()
     {
-        // Calcular les posicions dels extrems esquerre i dret del personatge
         Vector2 leftRaycastOrigin = new Vector2(transform.position.x - col.bounds.extents.x, transform.position.y);
         Vector2 rightRaycastOrigin = new Vector2(transform.position.x + col.bounds.extents.x, transform.position.y);
 
-        // Llançar els Raycasts des dels extrems
         RaycastHit2D leftHit = Physics2D.Raycast(leftRaycastOrigin, Vector2.down, raycastDistance, groundLayer);
         RaycastHit2D rightHit = Physics2D.Raycast(rightRaycastOrigin, Vector2.down, raycastDistance, groundLayer);
 
-        // Actualitzar l'estat de isGrounded basant-nos en els Raycasts
         isGrounded = leftHit.collider != null || rightHit.collider != null;
 
         if (isGrounded)
         {
             canJump = true;
             isJumping = false;
+            allowExtraJump = false; // Reset extra jump on ground
         }
         else
         {
-            canJump = false;
+            canJump = allowExtraJump; // Permitir salto si tenemos el salto extra
         }
 
-        // Capturar l'entrada de salt
-        if (Input.GetKeyDown(KeyCode.Space) && canJump || Input.GetKeyDown(KeyCode.W) && canJump)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W)) && canJump)
         {
             jumpPressed = true;
             jumpReleased = false;
+            allowExtraJump = false; // Consumir el salto extra si se usó
         }
 
-        // Detectar si el botó W es deixa anar
-        if (Input.GetKeyUp(KeyCode.Space) && isJumping || Input.GetKeyUp(KeyCode.W) && isJumping)
+        if ((Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.W)) && isJumping)
         {
             jumpReleased = true;
         }
@@ -77,7 +76,6 @@ public class CharacterJump : MonoBehaviour
             isGrounded = false;
             jumpPressed = false;
 
-           
             if (soundEffect != null)
             {
                 audioSource.PlayOneShot(soundEffect);
@@ -88,7 +86,6 @@ public class CharacterJump : MonoBehaviour
             }
         }
 
-        // Reduir la força del salt si el botó es deixa anar ràpidament
         if (jumpReleased)
         {
             if (rb.velocity.y > 0)
@@ -98,10 +95,18 @@ public class CharacterJump : MonoBehaviour
             jumpReleased = false;
         }
 
-        // Aplicar multiplicador de caiguda
         if (rb.velocity.y < 0)
         {
             rb.velocity += Vector2.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Si toca un enemigo en el aire, gana un salto extra
+        if (collision.gameObject.CompareTag("ENEMIC_AMARILLO") && !isGrounded)
+        {
+            allowExtraJump = true;
         }
     }
 
