@@ -109,7 +109,7 @@ public class ControllerCharacter : MonoBehaviour
         }
 
         // Si colisiona con un enemigo
-        if (collision.gameObject.CompareTag("ENEMIC"))
+        if (collision.gameObject.CompareTag("ENEMIC") || collision.gameObject.CompareTag("ENEMIC_AMARILLO"))
         {
             // Comprobar si el jugador está cayendo sobre el enemigo
             bool colisionDesdeArriba = false;
@@ -194,7 +194,7 @@ IEnumerator HandleAttack()
     void OnTriggerEnter2D(Collider2D other)
     {
         // Comprova si col·lisiona amb un enemic quan ataca avall
-        if (other.gameObject.CompareTag("ENEMIC") && HitboxDown.gameObject.activeSelf)
+        if (other.gameObject.CompareTag("ENEMIC")||other.gameObject.CompareTag("ENEMIC_AMARILLO") && HitboxDown.gameObject.activeSelf)
         {
             // Realitza el Pogo: afegeix l'impuls cap amunt
             playerRB.velocity = new Vector2(playerRB.velocity.x, 0); // Reseteja la velocitat vertical
