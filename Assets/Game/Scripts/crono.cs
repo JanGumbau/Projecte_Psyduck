@@ -5,38 +5,53 @@ using TMPro;
 
 public class crono : MonoBehaviour
 {
-    private TextMeshProUGUI textoCrono;
-    [SerializeField] private float tiempo = 0;
+    [SerializeField] private TMP_Text timerText;
 
-    private int tiempoMinuto = 0;
-    private int tiempoDecimasSegundo = 0;
-    private int tiemposegundos = 0;
+    private float timeElapsed;
+    private int minutes, seconds, miliseconds;
 
-    void Start()
+    private Transform player;
+    private Vector3 initialPosition;
+    private bool hasPlayerMoved = false;
+    private bool isRunning = true;
+
+    private void Start()
     {
-        textoCrono = GameObject.Find("TextoCronoUI").GetComponent<TextMeshProUGUI>();
-        if (textoCrono == null)
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
         {
-            Debug.LogError("No se encontró el objeto TextoCronoUI con TextMeshProUGUI");
+            player = playerObj.transform;
+            initialPosition = player.position;
+        }
+        else
+        {
+            Debug.LogError("No se encontró ningún objeto con el tag 'Player'");
         }
     }
 
-    void Cronometro()
+    private void Update()
     {
-        tiempo += Time.deltaTime;
+        if (!hasPlayerMoved && player != null)
+        {
+            if (Vector3.Distance(player.position, initialPosition) > 0.10f)
+            {
+                hasPlayerMoved = true;
+            }
+        }
 
-        tiempoMinuto = Mathf.FloorToInt(tiempo / 60);
-        tiemposegundos = Mathf.FloorToInt(tiempo % 60);
-        tiempoDecimasSegundo = Mathf.FloorToInt((tiempo % 1) * 100);
+        if (hasPlayerMoved && isRunning)
+        {
+            timeElapsed += Time.deltaTime;
+            minutes = (int)(timeElapsed / 60f);
+            seconds = (int)(timeElapsed % 60f);
+            miliseconds = (int)((timeElapsed % 1f) * 100f);
 
-        textoCrono.text = string.Format("{0:00}:{1:00}:{2:00}", tiempoMinuto, tiemposegundos, tiempoDecimasSegundo);
+            timerText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, miliseconds);
+        }
     }
 
-    void Update()
+    public void StopCrono()
     {
-        if (textoCrono != null)
-        {
-            Cronometro();
-        }
+        isRunning = false;
     }
 }
