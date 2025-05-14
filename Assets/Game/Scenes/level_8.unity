@@ -215,7 +215,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: level2_1 1
+          m_StringArgument: level_9
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &33053343
@@ -848,7 +848,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 292867418795516961, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 68.9
+      value: 68.863
       objectReference: {fileID: 0}
     - target: {fileID: 292867418795516961, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3123,6 +3123,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 640427709}
+  tiempoImagen1: 12
+  tiempoImagen2: 10
+  tiempoImagen3: 7
+  tiempoImagen4: 5
   imagen7: {fileID: 1554660613}
   imagen8: {fileID: 1115518660}
   imagen9: {fileID: 1999422238}
@@ -5792,7 +5796,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: level1_1
+          m_StringArgument: level_8
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1939716759
