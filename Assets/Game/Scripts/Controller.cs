@@ -13,7 +13,7 @@ public class ControllerCharacter : MonoBehaviour
     [SerializeField]
     private Rigidbody2D playerRB;
 
-    public float attackCooldown = 0.3f;
+    public float attackCooldown = 0.5f;
 
     public BoxCollider2D HitboxRight;
     public BoxCollider2D HitboxLeft;
@@ -29,6 +29,9 @@ public class ControllerCharacter : MonoBehaviour
     private Animator animator; // Referencia al Animator
 
     private bool isAttacking = false; // Control del estado de ataque
+    private float attackTimer = 0f;
+    private float hitboxTimer = 0f;
+    private BoxCollider2D activeHitbox = null;
 
     public float footstompImpulse = 10f;
 
@@ -75,9 +78,21 @@ public class ControllerCharacter : MonoBehaviour
         if (!isAttacking && (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow) ||
             Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)))
         {
-            StartCoroutine(HandleAttack());
+            HandleAttack();
         }
-
+        if (isAttacking)
+        {
+            attackTimer -= Time.deltaTime;
+            if (attackTimer <= 0f)
+            {
+                isAttacking = false;
+                if (activeHitbox != null)
+                {
+                    activeHitbox.gameObject.SetActive(false);
+                    activeHitbox = null;
+                }
+            }
+        }
         //if (Pogo)
         //{
         //    playerRB.velocity = new Vector2(playerRB.velocity.x, 0); // Resetear la velocidad en Y
@@ -147,47 +162,38 @@ public class ControllerCharacter : MonoBehaviour
         }
     }
 
-    IEnumerator HandleAttack()
+    void HandleAttack()
     {
         isAttacking = true;
+        attackTimer = attackCooldown;
 
-        // Activar la animación de ataque
         animator.SetTrigger("isAttacking");
 
-        // Activar la hitbox correspondiente
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            HitboxRight.gameObject.SetActive(true);
-            StartCoroutine(DeactivateHitbox(HitboxRight));
+            ActivateHitbox(HitboxRight);
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            HitboxLeft.gameObject.SetActive(true);
-            StartCoroutine(DeactivateHitbox(HitboxLeft));
+            ActivateHitbox(HitboxLeft);
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            HitboxUp.gameObject.SetActive(true);
-            StartCoroutine(DeactivateHitbox(HitboxUp));
+            ActivateHitbox(HitboxUp);
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            HitboxDown.gameObject.SetActive(true);
-            StartCoroutine(DeactivateHitbox(HitboxDown));
+            ActivateHitbox(HitboxDown);
         }
-
-        // Esperar el tiempo de cooldown
-        yield return new WaitForSeconds(attackCooldown);
-
-        isAttacking = false;
     }
 
-    IEnumerator DeactivateHitbox(BoxCollider2D hitbox)
+    void ActivateHitbox(BoxCollider2D hitbox)
     {
-        yield return new WaitForSeconds(hitboxDuration);
-        hitbox.gameObject.SetActive(false);
+        hitbox.gameObject.SetActive(true);
+        activeHitbox = hitbox;
+        
+       
     }
-
     void ReiniciarNivel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reinicia el nivel

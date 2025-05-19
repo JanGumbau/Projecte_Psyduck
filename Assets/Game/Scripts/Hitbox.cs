@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Hitbox : MonoBehaviour
 {
+    private Collider2D colliderToReactivate;
+    private float  reActivationTime;
     public Vector2 hitboxforce;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -25,15 +27,24 @@ public class Hitbox : MonoBehaviour
                     enemyRB.AddForce(hitboxforce, ForceMode2D.Impulse);
                 }
 
-                // Reactivar el collider del enemigo después de un tiempo
-                StartCoroutine(ReactivateEnemyCollider(enemyCollider));
+                 //Reactivar el collider del enemigo despuï¿½s de un tiempo
+                 colliderToReactivate = enemyCollider;
+                 reActivationTime = 0.5f;
+                 
             }
         }
     }
 
-    private IEnumerator ReactivateEnemyCollider(Collider2D enemyCollider)
+    private void Update()
     {
-        yield return new WaitForSeconds(0.5f); // Espera para reactivar el collider
-        enemyCollider.enabled = true;
+        if (colliderToReactivate != null)
+        {
+          
+            if (Time.time > reActivationTime)
+            {
+                colliderToReactivate.enabled = true;
+                colliderToReactivate = null;
+            }
+        }
     }
 }
