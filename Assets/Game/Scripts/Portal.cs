@@ -18,24 +18,25 @@ public class Portal : MonoBehaviour
 
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private bool hasActivated = false;
+
+    void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && enemyManager && enemyManager.AreAllEnemiesDestroyed())
+        if (!hasActivated && other.CompareTag("Player") && enemyManager && enemyManager.AreAllEnemiesDestroyed())
         {
-           
+            hasActivated = true;
+
             crono cronometro = FindObjectOfType<crono>();
             if (cronometro != null)
             {
                 cronometro.StopCrono();
             }
 
-            // Mostrar el panel
             if (panelUI != null)
             {
                 panelUI.SetActive(true);
             }
-
-
         }
     }
+
 }
