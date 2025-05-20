@@ -153,6 +153,11 @@ public class ControllerCharacter : MonoBehaviour
                     float fuerzaHaciaAbajo = -13f; // Ajusta este valor según lo que quieras
                     rbEnemigo.velocity = Vector2.zero; // Reset completo
                     rbEnemigo.AddForce(Vector2.up * fuerzaHaciaAbajo, ForceMode2D.Impulse); // Solo eje Y negativo
+                    Enemy enemic = collision.gameObject.GetComponent<Enemy>();
+                    if (enemic != null)
+                    {
+                        enemic.RebreDany(); // Fa que canvii de color
+                    }
                 }
             }
             else
