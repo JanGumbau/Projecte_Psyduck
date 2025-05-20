@@ -7,6 +7,7 @@ TagManager:
   - GROUND
   - PINCHOS
   - ENEMIC
+  - crono
   layers:
   - Default
   - TransparentFX
