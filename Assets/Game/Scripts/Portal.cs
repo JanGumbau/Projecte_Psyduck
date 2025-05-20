@@ -10,19 +10,19 @@ public class Portal : MonoBehaviour
 
     void Start()
     {
-        /*
+
         if (panelUI != null)
         {
             panelUI.SetActive(false); // Asegúrate de que el panel esté oculto al inicio
         }
-        */
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && enemyManager && enemyManager.AreAllEnemiesDestroyed())
         {
-           /* // Detener el cronómetro
+            // Detener el cronómetro
             crono cronometro = FindObjectOfType<crono>();
             if (cronometro != null)
             {
@@ -34,8 +34,8 @@ public class Portal : MonoBehaviour
             {
                 panelUI.SetActive(true);
             }
-            */
-           SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+
         }
     }
 }
