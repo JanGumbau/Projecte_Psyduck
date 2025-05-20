@@ -85,7 +85,7 @@ public class crono : MonoBehaviour
     {
         if (timeElapsed > tiempoImagen1 && !imagenesFijadas)
         {
-            // No ocultamos nada, solo dejamos las imágenes ya activas
+           
             imagenesFijadas = true;
             return;
         }
@@ -138,9 +138,21 @@ public class crono : MonoBehaviour
         isRunning = false;
     }
 
-    // Métodos para acceder a los tiempos (opcional)
-    public void SetTiempoImagen1(float tiempo) { tiempoImagen1 = tiempo; }
-    public void SetTiempoImagen2(float tiempo) { tiempoImagen2 = tiempo; }
-    public void SetTiempoImagen3(float tiempo) { tiempoImagen3 = tiempo; }
-    public void SetTiempoImagen4(float tiempo) { tiempoImagen4 = tiempo; }
+   
+    public void SetTiempoImagen1(float tiempo)
+    {
+        tiempoImagen1 = tiempo; 
+    }
+    public void SetTiempoImagen2(float tiempo)
+    { 
+        tiempoImagen2 = tiempo;
+    }
+    public void SetTiempoImagen3(float tiempo)
+    {
+        tiempoImagen3 = tiempo;
+    }
+    public void SetTiempoImagen4(float tiempo) 
+    {
+        tiempoImagen4 = tiempo;
+    }
 }
