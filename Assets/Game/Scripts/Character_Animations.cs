@@ -26,24 +26,17 @@ public class Animations : MonoBehaviour
     private void Update()
     {
         // Movimiento horizontal (Idle y Run)
-        bool isRunning = Mathf.Abs(rb.velocity.x) > 0.1f; // Usamos la velocidad real del Rigidbody2D
+        bool isRunning = Mathf.Abs(rb.velocity.x) > 0.1f;
         animator.SetBool("isRunning", isRunning);
 
         // Salto (Idle y Jump)
         animator.SetBool("isJumping", characterJump.isJumping);
 
-        // Ataque
+        // Ataque espameable
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow) ||
             Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             animator.SetTrigger("isAttacking");
-            StartCoroutine(ResetIsAttackingAfterDelay(0.1f)); // Llama a la corrutina para reiniciar isAttacking
         }
-    }
-
-    private IEnumerator ResetIsAttackingAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay); // Espera el tiempo especificado
-        animator.SetBool("isAttacking", false); // Reinicia isAttacking a false
     }
 }
