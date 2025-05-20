@@ -1,5 +1,4 @@
 using System.Collections;
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,19 +18,21 @@ public class ControllerCharacter : MonoBehaviour
     public BoxCollider2D HitboxUp;
     public BoxCollider2D HitboxDown;
 
-    public float hitboxDuration = 0.2f; // Tiempo de duración de la hitbox
+    public float hitboxDuration = 0.2f; 
 
     public float raycastDistance = 0.1f;
     public LayerMask groundLayer;
 
     private SpriteRenderer spriteRenderer;
-    private Animator animator; // Referencia al Animator
+    private Animator animator; 
 
-    private bool isAttacking = false; // Control del estado de ataque
+    private bool isAttacking = false; 
     private float attackTimer = 0f;
     private BoxCollider2D activeHitbox = null;
 
     public float footstompImpulse = 10f;
+
+    private bool enPortal = false; 
 
     void Start()
     {
@@ -41,7 +42,7 @@ public class ControllerCharacter : MonoBehaviour
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
-        animator = GetComponent<Animator>(); // Inicializar el Animator
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -51,28 +52,33 @@ public class ControllerCharacter : MonoBehaviour
             return;
         }
 
-        if (Input.GetKey(KeyCode.D))
+        if (enPortal)
         {
-            xDirection = 1;
-            spriteRenderer.flipX = false;
+            xDirection = 0; 
         }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            xDirection = -1;
-            spriteRenderer.flipX = true;
-        }
-        else if (Input.GetKey(KeyCode.R))
-        {
-           ReiniciarNivel();
-        }
-       
-
         else
         {
-            xDirection = 0;
+            if (Input.GetKey(KeyCode.D))
+            {
+                xDirection = 1;
+                spriteRenderer.flipX = false;
+            }
+            else if (Input.GetKey(KeyCode.A))
+            {
+                xDirection = -1;
+                spriteRenderer.flipX = true;
+            }
+            else if (Input.GetKey(KeyCode.R))
+            {
+                ReiniciarNivel();
+            }
+            else
+            {
+                xDirection = 0;
+            }
         }
 
-        // Ataque
+       
         if (!isAttacking && (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow) ||
             Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)))
         {
@@ -91,12 +97,6 @@ public class ControllerCharacter : MonoBehaviour
                 }
             }
         }
-        //if (Pogo)
-        //{
-        //    playerRB.velocity = new Vector2(playerRB.velocity.x, 0); // Resetear la velocidad en Y
-        //    playerRB.AddForce(Vector3.up * Impuls);
-        //    Pogo = false;
-        //}
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, groundLayer);
     }
@@ -114,7 +114,7 @@ public class ControllerCharacter : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Si colisiona con pinchos, siempre reinicia el nivel
+      
         if (collision.gameObject.CompareTag("PINCHOS"))
         {
             ReiniciarNivel();
@@ -126,10 +126,10 @@ public class ControllerCharacter : MonoBehaviour
         {
             bool colisionDesdeArriba = false;
 
-            // Verificar todos los puntos de contacto
+            
             foreach (ContactPoint2D contacto in collision.contacts)
             {
-                // La normal apunta hacia arriba (desde la perspectiva del enemigo)
+              
                 if (contacto.normal.y > 0.5f)
                 {
                     colisionDesdeArriba = true;
@@ -139,22 +139,22 @@ public class ControllerCharacter : MonoBehaviour
 
             if (colisionDesdeArriba)
             {
-                // ✅ Rebote del jugador hacia arriba de forma consistente
+               
                 Rigidbody2D rbJugador = GetComponent<Rigidbody2D>();
-                rbJugador.velocity = Vector2.zero; // Reset completo
+                rbJugador.velocity = Vector2.zero; 
                 rbJugador.AddForce(Vector2.up * footstompImpulse, ForceMode2D.Impulse);
 
-                // ✅ Impulsar al enemigo solo en el eje Y (negativo)
+               
                 Rigidbody2D rbEnemigo = collision.rigidbody;
                 if (rbEnemigo != null)
                 {
-                    float fuerzaHaciaAbajo = -13f; // Ajusta este valor según lo que quieras
-                    rbEnemigo.velocity = Vector2.zero; // Reset completo
+                    float fuerzaHaciaAbajo = -13f; 
+                    rbEnemigo.velocity = Vector2.zero; 
                     rbEnemigo.AddForce(Vector2.up * fuerzaHaciaAbajo, ForceMode2D.Impulse); // Solo eje Y negativo
                     Enemy enemic = collision.gameObject.GetComponent<Enemy>();
                     if (enemic != null)
                     {
-                        enemic.RebreDany(); // Fa que canvii de color
+                        enemic.RebreDany();
                     }
                 }
             }
@@ -194,22 +194,27 @@ public class ControllerCharacter : MonoBehaviour
     {
         hitbox.gameObject.SetActive(true);
         activeHitbox = hitbox;
-        
-       
-    }
-    void ReiniciarNivel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reinicia el nivel
     }
 
-    //void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    // Comprova si col·lisiona amb un enemic quan ataca avall
-    //    if (other.gameObject.CompareTag("ENEMIC") && HitboxDown.gameObject.activeSelf)
-    //    {
-    //        // Realitza el Pogo: afegeix l'impuls cap amunt
-    //        playerRB.velocity = new Vector2(playerRB.velocity.x, 0); // Reseteja la velocitat vertical
-    //        playerRB.AddForce(Vector2.up * PogoImpuls);
-    //    }
-    //}
+    void ReiniciarNivel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Portal"))
+        {
+            enPortal = true; 
+            playerRB.velocity = Vector2.zero;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Portal"))
+        {
+            enPortal = false;
+        }
+    }
 }
