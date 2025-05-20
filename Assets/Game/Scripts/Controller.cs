@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class ControllerCharacter : MonoBehaviour
 {
     public bool Pogo = false;
-    private float Impuls = 5f;
     public float PogoImpuls = 5f;
     public float velocity = 5f;
     private int xDirection = 0;
@@ -30,7 +29,6 @@ public class ControllerCharacter : MonoBehaviour
 
     private bool isAttacking = false; // Control del estado de ataque
     private float attackTimer = 0f;
-    private float hitboxTimer = 0f;
     private BoxCollider2D activeHitbox = null;
 
     public float footstompImpulse = 10f;
