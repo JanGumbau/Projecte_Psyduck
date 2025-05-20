@@ -25,6 +25,11 @@ public class Hitbox : MonoBehaviour
                 {
                     Debug.Log("Hit by: " + gameObject.name + "ForceX: " + hitboxforce.x + "ForceY: " + hitboxforce.y);
                     enemyRB.AddForce(hitboxforce, ForceMode2D.Impulse);
+                    Enemy enemic = collision.GetComponent<Enemy>();
+                    if (enemic != null)
+                    {
+                        enemic.RebreDany(); // Truca el mètode que fa el canvi de color
+                    }
                 }
 
                  //Reactivar el collider del enemigo despu�s de un tiempo
