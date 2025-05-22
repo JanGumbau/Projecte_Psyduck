@@ -7,7 +7,7 @@ TagManager:
   - GROUND
   - PINCHOS
   - ENEMIC
-  - crono
+  - ENEMIC_AMARILLO
   - Portal
   layers:
   - Default
