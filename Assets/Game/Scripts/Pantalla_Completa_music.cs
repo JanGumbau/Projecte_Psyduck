@@ -20,11 +20,11 @@ public class Pantalla_Completa_music : MonoBehaviour
 
     private void Start()
     {
-       if(PlayerPrefs.HasKey("musicVolume"))
+        if (PlayerPrefs.HasKey("MusicVolume"))
         {
             LoadVolume();
         }
-       else
+        else
         {
             SetMusicVolume();
             SetSFXVolume();
@@ -50,6 +50,7 @@ public class Pantalla_Completa_music : MonoBehaviour
         musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
         SFXSlider.value = PlayerPrefs.GetFloat("SFXVolume");
         SetMusicVolume();
+        SetSFXVolume();
     }
 
 
