@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
     {
         
         // Comprova si el collider té el tag "Enemic" o "Spikes"
-        if ( collision.collider.CompareTag("PINCHOS") || collision.collider.CompareTag("ENEMIC"))
+        if ( collision.collider.CompareTag("PINCHOS") || collision.collider.CompareTag("ENEMIC")|| collision.collider.CompareTag("ENEMIC_AMARILLO"))
         {
             
             Destroy(gameObject);
