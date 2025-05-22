@@ -122,7 +122,7 @@ public class ControllerCharacter : MonoBehaviour
         }
 
         // Si colisiona con un enemigo
-        if (collision.gameObject.CompareTag("ENEMIC"))
+        if (collision.gameObject.CompareTag("ENEMIC") || collision.gameObject.CompareTag("ENEMIC_AMARILLO"))
         {
             bool colisionDesdeArriba = false;
 
@@ -203,6 +203,8 @@ public class ControllerCharacter : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        // Comprova si col·lisiona amb un enemic quan ataca avall
+        if (other.gameObject.CompareTag("ENEMIC")||other.gameObject.CompareTag("ENEMIC_AMARILLO") && HitboxDown.gameObject.activeSelf)
         if (other.CompareTag("Portal"))
         {
             enPortal = true; 
