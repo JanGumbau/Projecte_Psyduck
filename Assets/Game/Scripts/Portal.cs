@@ -14,6 +14,7 @@ public class Portal : MonoBehaviour
         if (panelUI != null)
         {
             panelUI.SetActive(false); 
+            Cursor.visible = false;
         }
 
     }
@@ -35,6 +36,7 @@ public class Portal : MonoBehaviour
             if (panelUI != null)
             {
                 panelUI.SetActive(true);
+                Cursor.visible = true;
             }
         }
     }
