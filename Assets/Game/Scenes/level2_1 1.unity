@@ -2546,7 +2546,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: level2_1 1
+          m_StringArgument: level_3
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1104037084
@@ -3879,7 +3879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyManager: {fileID: 613469153}
-  panelUI: {fileID: 0}
+  panelUI: {fileID: 2084956906}
 --- !u!95 &1671934463
 Animator:
   serializedVersion: 5
@@ -5101,7 +5101,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2084956907
 RectTransform:
   m_ObjectHideFlags: 0
