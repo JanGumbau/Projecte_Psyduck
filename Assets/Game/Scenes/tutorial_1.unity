@@ -2422,7 +2422,7 @@ GameObject:
   - component: {fileID: 979587491}
   - component: {fileID: 979587490}
   m_Layer: 6
-  m_Name: Text (TMP)
+  m_Name: jump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
