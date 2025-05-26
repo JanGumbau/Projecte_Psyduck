@@ -196,7 +196,7 @@ public class ControllerCharacter : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Portal"))
+        if (other.CompareTag("Portal") && EnemyManager.Instance != null && EnemyManager.Instance.AreAllEnemiesDestroyed())
         {
             enPortal = true;
             playerRB.velocity = Vector2.zero;
@@ -218,7 +218,7 @@ public class ControllerCharacter : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Portal"))
+        if (other.CompareTag("Portal") )
         {
             enPortal = false;
         }
