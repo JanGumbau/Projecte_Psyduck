@@ -85,7 +85,7 @@ public class crono : MonoBehaviour
     {
         if (timeElapsed > tiempoImagen1 && !imagenesFijadas)
         {
-           
+
             imagenesFijadas = true;
             return;
         }
@@ -138,20 +138,20 @@ public class crono : MonoBehaviour
         isRunning = false;
     }
 
-   
+
     public void SetTiempoImagen1(float tiempo)
     {
-        tiempoImagen1 = tiempo; 
+        tiempoImagen1 = tiempo;
     }
     public void SetTiempoImagen2(float tiempo)
-    { 
+    {
         tiempoImagen2 = tiempo;
     }
     public void SetTiempoImagen3(float tiempo)
     {
         tiempoImagen3 = tiempo;
     }
-    public void SetTiempoImagen4(float tiempo) 
+    public void SetTiempoImagen4(float tiempo)
     {
         tiempoImagen4 = tiempo;
     }

@@ -11,10 +11,10 @@ public class Pantalla_Completa_music : MonoBehaviour
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider SFXSlider;
 
-    
+
     public void TogglePantallaCompleta()
     {
-        
+
         Screen.fullScreen = !Screen.fullScreen;
     }
 
