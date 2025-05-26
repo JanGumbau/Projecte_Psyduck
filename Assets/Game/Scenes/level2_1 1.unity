@@ -1642,10 +1642,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 1173296264}
-  tiempoImagen1: 12
-  tiempoImagen2: 10
-  tiempoImagen3: 7
-  tiempoImagen4: 5
+  tiempoImagen1: 8
+  tiempoImagen2: 5
+  tiempoImagen3: 2.5
+  tiempoImagen4: 1.5
   imagen7: {fileID: 768529901}
   imagen8: {fileID: 1985029754}
   imagen9: {fileID: 50811528}

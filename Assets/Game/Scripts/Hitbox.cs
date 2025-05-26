@@ -11,7 +11,7 @@ public class Hitbox : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Entro");
-        if (collision.CompareTag("ENEMIC"))
+        if (collision.CompareTag("ENEMIC") || collision.CompareTag("ENEMIC_AMARILLO"))
         {            
             // Desactivar temporalmente el collider del enemigo
             Collider2D enemyCollider = collision.GetComponent<Collider2D>();
