@@ -200,6 +200,10 @@ public class ControllerCharacter : MonoBehaviour
         {
             enPortal = true;
             playerRB.velocity = Vector2.zero;
+            xDirection = 0;
+            
+
+
         }
 
         if ((other.gameObject.CompareTag("ENEMIC") || other.gameObject.CompareTag("ENEMIC_AMARILLO")) && HitboxDown.gameObject.activeSelf)

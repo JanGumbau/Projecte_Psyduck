@@ -16,6 +16,7 @@ public class Portal : MonoBehaviour
         {
             panelUI.SetActive(false);
             Cursor.visible = false;
+           
         }
     }
 
@@ -34,6 +35,7 @@ public class Portal : MonoBehaviour
             if (panelUI != null)
             {
                 panelUI.SetActive(true); // Activamos primero para que se muestre
+                Destroy(other.gameObject);
                 panelUI.transform.localScale = Vector3.zero; // Empezamos desde cero
                 Cursor.visible = true;
                 StartCoroutine(ScaleInPanel(panelUI.transform));
