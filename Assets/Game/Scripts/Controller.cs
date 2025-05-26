@@ -115,7 +115,7 @@ public class ControllerCharacter : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("PINCHOS"))
         {
-            ReiniciarNivel();
+            animator.SetTrigger("isDead");
             return;
         }
 
@@ -153,7 +153,7 @@ public class ControllerCharacter : MonoBehaviour
             }
             else
             {
-                ReiniciarNivel();
+                animator.SetTrigger("isDead");
             }
         }
     }
@@ -189,7 +189,8 @@ public class ControllerCharacter : MonoBehaviour
         activeHitbox = hitbox;
     }
 
-    void ReiniciarNivel()
+
+    public void ReiniciarNivel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
