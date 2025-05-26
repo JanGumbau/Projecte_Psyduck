@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
     public static int enemiesDestroyed; // Track enemies destroyed
+    private Animator animator;
 
 
     void Awake()
@@ -15,6 +16,7 @@ public class Enemy : MonoBehaviour
         EnemyManager.Instance.enemiesCount++; // Increment enemies count when an enemy is created
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
+        animator = GetComponent<Animator>();
     }
     public void RebreDany()
     {
@@ -30,13 +32,17 @@ public class Enemy : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        
-        // Comprova si el collider té el tag "Enemic" o "Spikes"
-        if ( collision.collider.CompareTag("PINCHOS") || collision.collider.CompareTag("ENEMIC")|| collision.collider.CompareTag("ENEMIC_AMARILLO"))
+        if (collision.collider.CompareTag("PINCHOS") || collision.collider.CompareTag("ENEMIC") || collision.collider.CompareTag("ENEMIC_AMARILLO"))
         {
-            
-            Destroy(gameObject);
-            EnemyManager.Instance.enemiesDestroyed++;
+            animator.SetTrigger("isDead");
+            // NO destruyas aquí, espera al evento de la animación
         }
+    }
+
+    // Este método lo llamará el Animation Event al final de la animación de muerte
+    public void DestroyEnemy()
+    {
+        EnemyManager.Instance.enemiesDestroyed++;
+        Destroy(gameObject);
     }
 }
