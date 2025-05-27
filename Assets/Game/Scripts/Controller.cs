@@ -1,6 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class ControllerCharacter : MonoBehaviour
 {
@@ -34,14 +35,19 @@ public class ControllerCharacter : MonoBehaviour
 
     private bool enPortal = false;
 
+    [Header("Audio")]
+    public AudioSource sfxAudioSource;        // AudioSource para reproducir efectos de sonido
+    // Eliminado: public AudioClip allSidesAttackClip;
+    public AudioClip singleAttackClip;        // Clip que se reproduce al atacar con un solo botón
+
     void Start()
     {
-        if (playerRB != null)
+        if (playerRB == null)
         {
             playerRB = GetComponent<Rigidbody2D>();
-            spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
+        spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
     }
 
@@ -97,6 +103,7 @@ public class ControllerCharacter : MonoBehaviour
             }
         }
 
+        // Raycast para suelo (no modificado)
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, groundLayer);
     }
 
@@ -165,21 +172,56 @@ public class ControllerCharacter : MonoBehaviour
 
         animator.SetTrigger("isAttacking");
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        bool attackRight = Input.GetKeyDown(KeyCode.RightArrow);
+        bool attackLeft = Input.GetKeyDown(KeyCode.LeftArrow);
+        bool attackUp = Input.GetKeyDown(KeyCode.UpArrow);
+        bool attackDown = Input.GetKeyDown(KeyCode.DownArrow);
+
+        int attackCount = 0;
+        if (attackRight) attackCount++;
+        if (attackLeft) attackCount++;
+        if (attackUp) attackCount++;
+        if (attackDown) attackCount++;
+
+        if (attackCount == 4)
         {
-            ActivateHitbox(HitboxRight);
+            // Eliminado sonido para ataque en los 4 lados
+
+            // Activar todos los hitboxes
+            HitboxRight.gameObject.SetActive(true);
+            HitboxLeft.gameObject.SetActive(true);
+            HitboxUp.gameObject.SetActive(true);
+            HitboxDown.gameObject.SetActive(true);
+
+            activeHitbox = HitboxRight; // cualquiera para luego desactivar
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (attackCount == 1)
         {
-            ActivateHitbox(HitboxLeft);
+            // Sonido para ataque simple
+            if (sfxAudioSource != null && singleAttackClip != null)
+            {
+                sfxAudioSource.PlayOneShot(singleAttackClip);
+            }
+
+            // Activa solo el hitbox correspondiente
+            if (attackRight) ActivateHitbox(HitboxRight);
+            else if (attackLeft) ActivateHitbox(HitboxLeft);
+            else if (attackUp) ActivateHitbox(HitboxUp);
+            else if (attackDown) ActivateHitbox(HitboxDown);
         }
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        else if (attackCount > 1 && attackCount < 4)
         {
-            ActivateHitbox(HitboxUp);
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            ActivateHitbox(HitboxDown);
+            // Si ataca con 2 o 3 botones, reproduce el sonido simple una sola vez
+            if (sfxAudioSource != null && singleAttackClip != null)
+            {
+                sfxAudioSource.PlayOneShot(singleAttackClip);
+            }
+
+            // Activa solo el primer hitbox detectado, para evitar activar varios a la vez
+            if (attackRight) ActivateHitbox(HitboxRight);
+            else if (attackLeft) ActivateHitbox(HitboxLeft);
+            else if (attackUp) ActivateHitbox(HitboxUp);
+            else if (attackDown) ActivateHitbox(HitboxDown);
         }
     }
 
@@ -201,9 +243,6 @@ public class ControllerCharacter : MonoBehaviour
             enPortal = true;
             playerRB.velocity = Vector2.zero;
             xDirection = 0;
-            
-
-
         }
 
         if ((other.gameObject.CompareTag("ENEMIC") || other.gameObject.CompareTag("ENEMIC_AMARILLO")) && HitboxDown.gameObject.activeSelf)
@@ -218,7 +257,7 @@ public class ControllerCharacter : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Portal") )
+        if (other.CompareTag("Portal"))
         {
             enPortal = false;
         }
