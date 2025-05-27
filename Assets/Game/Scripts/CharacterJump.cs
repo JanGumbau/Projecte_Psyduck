@@ -7,7 +7,10 @@ public class CharacterJump : MonoBehaviour
     [SerializeField] private float Impuls = 0f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float fallMultiplier = 0f;
-    [SerializeField] private float raycastDistance = 0f;
+    [SerializeField] private float raycastDistance = 0.5f;
+    [SerializeField] private float coyoteTime = 0.25f;      // Temps de gràcia després de sortir del terra
+    [SerializeField] private float jumpBufferTime = 0.15f;  // Temps per guardar l'input de salt
+
     public AudioClip soundEffect;
     private AudioSource audioSource;
 
@@ -21,6 +24,10 @@ public class CharacterJump : MonoBehaviour
     private Collider2D col;
 
     private bool allowExtraJump = false;
+
+    // Coyote time & jump buffer
+    private float coyoteTimeCounter = 0f;
+    private float jumpBufferCounter = 0f;
 
     void Start()
     {
@@ -43,22 +50,27 @@ public class CharacterJump : MonoBehaviour
 
         isGrounded = leftHit.collider != null || rightHit.collider != null;
 
-        if (isGrounded)
-        {
-            canJump = true;
+        if (isGrounded && rb.velocity.y <= 0.01f)
             isJumping = false;
-            allowExtraJump = false; // Reset extra jump on ground
-        }
-        else
-        {
-            canJump = allowExtraJump; // Permitir salto si tenemos el salto extra
-        }
 
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W)) && canJump)
+        // --- COYOTE TIME ---
+        if (isGrounded)
+            coyoteTimeCounter = coyoteTime;
+        else
+            coyoteTimeCounter -= Time.deltaTime;
+
+        // --- JUMP BUFFER ---
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))
+            jumpBufferCounter = jumpBufferTime;
+        else
+            jumpBufferCounter -= Time.deltaTime;
+
+        // --- JUMP REQUEST ---
+        if ((jumpBufferCounter > 0 && coyoteTimeCounter > 0) || (canJump && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))))
         {
             jumpPressed = true;
-            jumpReleased = false;
-            allowExtraJump = false; // Consumir el salto extra si se usó
+            jumpBufferCounter = 0f;
+            allowExtraJump = false;
         }
 
         if ((Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.W)) && isJumping)
@@ -75,6 +87,7 @@ public class CharacterJump : MonoBehaviour
             isJumping = true;
             isGrounded = false;
             jumpPressed = false;
+            coyoteTimeCounter = 0f; // Consumeix el coyote time
 
             if (soundEffect != null)
             {
