@@ -33,6 +33,7 @@ public class ControllerCharacter : MonoBehaviour
     public float footstompImpulse = 10f;
 
     private bool enPortal = false;
+    private bool isDead = false; // Añadido para controlar el estado de muerte
 
     void Start()
     {
@@ -47,7 +48,7 @@ public class ControllerCharacter : MonoBehaviour
 
     void Update()
     {
-        if (PauseMenu.GameIsPaused)
+        if (PauseMenu.GameIsPaused || isDead)
         {
             return;
         }
@@ -102,6 +103,7 @@ public class ControllerCharacter : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (isDead) return;
         playerRB.velocity = new Vector2(xDirection * velocity, playerRB.velocity.y);
     }
 
@@ -115,7 +117,13 @@ public class ControllerCharacter : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("PINCHOS"))
         {
-            animator.SetTrigger("isDead");
+            if (!isDead)
+            {
+                isDead = true; // Bloquea inmediatamente
+                playerRB.velocity = Vector2.zero;
+                xDirection = 0;
+                animator.SetTrigger("isDead");
+            }
             return;
         }
 
@@ -153,13 +161,21 @@ public class ControllerCharacter : MonoBehaviour
             }
             else
             {
-                animator.SetTrigger("isDead");
+                if (!isDead)
+                {
+                    isDead = true; // Bloquea inmediatamente
+                    playerRB.velocity = Vector2.zero;
+                    xDirection = 0;
+                    animator.SetTrigger("isDead");
+                }
             }
         }
     }
 
     void HandleAttack()
     {
+        if (isDead) return;
+
         isAttacking = true;
         attackTimer = attackCooldown;
 
@@ -189,10 +205,16 @@ public class ControllerCharacter : MonoBehaviour
         activeHitbox = hitbox;
     }
 
-
     public void ReiniciarNivel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void OnDeathStart()
+    {
+        isDead = true; // Ahora sí bloquea todo
+        playerRB.velocity = Vector2.zero;
+        xDirection = 0;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -202,9 +224,6 @@ public class ControllerCharacter : MonoBehaviour
             enPortal = true;
             playerRB.velocity = Vector2.zero;
             xDirection = 0;
-            
-
-
         }
 
         if ((other.gameObject.CompareTag("ENEMIC") || other.gameObject.CompareTag("ENEMIC_AMARILLO")) && HitboxDown.gameObject.activeSelf)
@@ -219,7 +238,7 @@ public class ControllerCharacter : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Portal") )
+        if (other.CompareTag("Portal"))
         {
             enPortal = false;
         }
