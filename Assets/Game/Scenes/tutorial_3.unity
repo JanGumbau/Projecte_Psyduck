@@ -635,6 +635,10 @@ PrefabInstance:
       propertyPath: hitboxforce.y
       value: -20
       objectReference: {fileID: 0}
+    - target: {fileID: 2304001789211583059, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
+      propertyPath: Priority
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2426068100868452305, guid: 4f4c8d50965d0234bb774819f4e29cb3, type: 3}
       propertyPath: m_SortingOrder
       value: 2
@@ -896,7 +900,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: tutorial_2
+          m_StringArgument: tutorial_3
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &737047403
@@ -3455,7 +3459,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -7861273561898336058, guid: 6a8331c39e882f149ad7154d645e2731, type: 2}
   m_audioClip: {fileID: 8300000, guid: 884d08fb106a6eb48bc769129fa714ba, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.205
   m_Pitch: 1
   Loop: 0
   Mute: 0
