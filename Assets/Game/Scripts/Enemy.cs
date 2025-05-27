@@ -7,39 +7,55 @@ public class Enemy : MonoBehaviour
     private EnemyManager enemyManager;
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
-    public static int enemiesDestroyed; // Track enemies destroyed
+    public static int enemiesDestroyed;
     private Animator animator;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip deathSound;
+
+    private bool hasDied = false; 
 
     void Awake()
     {
-        EnemyManager.Instance.enemiesCount++; // Increment enemies count when an enemy is created
+        EnemyManager.Instance.enemiesCount++;
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
         animator = GetComponent<Animator>();
     }
+
     public void RebreDany()
     {
-        StartCoroutine(CanviColorTemporal(Color.red, 0.2f)); // Canvi a vermell durant 1 segon
+        if (!hasDied)
+        {
+            StartCoroutine(CanviColorTemporal(Color.red, 0.2f));
+        }
     }
-    private System.Collections.IEnumerator CanviColorTemporal(Color nouColor, float duracio)
+
+    private IEnumerator CanviColorTemporal(Color nouColor, float duracio)
     {
         spriteRenderer.color = nouColor;
         yield return new WaitForSeconds(duracio);
         spriteRenderer.color = originalColor;
     }
 
-
     public void OnCollisionEnter2D(Collision2D collision)
     {
+        if (hasDied) return;
+
         if (collision.collider.CompareTag("PINCHOS") || collision.collider.CompareTag("ENEMIC") || collision.collider.CompareTag("ENEMIC_AMARILLO"))
         {
+            hasDied = true;
             animator.SetTrigger("isDead");
-            // NO destruyas aquí, espera al evento de la animación
+
+            if (audioSource != null && deathSound != null)
+            {
+                audioSource.PlayOneShot(deathSound);
+            }
         }
     }
 
-    // Este método lo llamará el Animation Event al final de la animación de muerte
+    
     public void DestroyEnemy()
     {
         EnemyManager.Instance.enemiesDestroyed++;

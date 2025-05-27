@@ -264,7 +264,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -7861273561898336058, guid: 6a8331c39e882f149ad7154d645e2731, type: 2}
   m_audioClip: {fileID: 8300000, guid: 884d08fb106a6eb48bc769129fa714ba, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.205
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2219,7 +2219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 1917632960}
-  controller: {fileID: 0}
+  scaleDuration: 0.5
 --- !u!4 &874035339
 Transform:
   m_ObjectHideFlags: 0
