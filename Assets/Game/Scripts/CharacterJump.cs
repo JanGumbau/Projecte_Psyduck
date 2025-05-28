@@ -20,7 +20,7 @@ public class CharacterJump : MonoBehaviour
     public bool jumpReleased = false;
     private Collider2D col;
 
-    private bool allowExtraJump = false;
+    public bool allowExtraJump = false;
 
     void Start()
     {
