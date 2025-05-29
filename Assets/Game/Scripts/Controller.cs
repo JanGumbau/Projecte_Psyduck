@@ -36,9 +36,8 @@ public class ControllerCharacter : MonoBehaviour
     private bool enPortal = false;
 
     [Header("Audio")]
-    public AudioSource sfxAudioSource;        // AudioSource para reproducir efectos de sonido
-    // Eliminado: public AudioClip allSidesAttackClip;
-    public AudioClip singleAttackClip;        // Clip que se reproduce al atacar con un solo botón
+    public AudioSource sfxAudioSource;
+    public AudioClip singleAttackClip;
 
     void Start()
     {
@@ -61,7 +60,7 @@ public class ControllerCharacter : MonoBehaviour
         if (enPortal)
         {
             xDirection = 0;
-            return; // Bloquea movimiento y ataques
+            return;
         }
 
         if (Input.GetKey(KeyCode.D))
@@ -95,6 +94,7 @@ public class ControllerCharacter : MonoBehaviour
             if (attackTimer <= 0f)
             {
                 isAttacking = false;
+                animator.SetBool("isAttacking", false);  // Atura animació
                 if (activeHitbox != null)
                 {
                     activeHitbox.gameObject.SetActive(false);
@@ -103,7 +103,7 @@ public class ControllerCharacter : MonoBehaviour
             }
         }
 
-        // Raycast para suelo (no modificado)
+        // Raycast per detectar el terra
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, groundLayer);
     }
 
@@ -167,62 +167,33 @@ public class ControllerCharacter : MonoBehaviour
 
     void HandleAttack()
     {
+        float x = 0f, y = 0f;
+
+        if (Input.GetKeyDown(KeyCode.RightArrow)) x = 1f;
+        else if (Input.GetKeyDown(KeyCode.LeftArrow)) x = -1f;
+
+        if (Input.GetKeyDown(KeyCode.UpArrow)) y = 1f;
+        else if (Input.GetKeyDown(KeyCode.DownArrow)) y = -1f;
+
+        // Debug opcional per verificar direcció d'atac
+        Debug.Log("Attack direction → X: " + x + " | Y: " + y);
+
+        animator.SetFloat("attackX", x);
+        animator.SetFloat("attackY", y);
+        animator.SetBool("isAttacking", true);
+
         isAttacking = true;
         attackTimer = attackCooldown;
 
-        animator.SetTrigger("isAttacking");
-
-        bool attackRight = Input.GetKeyDown(KeyCode.RightArrow);
-        bool attackLeft = Input.GetKeyDown(KeyCode.LeftArrow);
-        bool attackUp = Input.GetKeyDown(KeyCode.UpArrow);
-        bool attackDown = Input.GetKeyDown(KeyCode.DownArrow);
-
-        int attackCount = 0;
-        if (attackRight) attackCount++;
-        if (attackLeft) attackCount++;
-        if (attackUp) attackCount++;
-        if (attackDown) attackCount++;
-
-        if (attackCount == 4)
+        if (sfxAudioSource != null && singleAttackClip != null)
         {
-            // Eliminado sonido para ataque en los 4 lados
-
-            // Activar todos los hitboxes
-            HitboxRight.gameObject.SetActive(true);
-            HitboxLeft.gameObject.SetActive(true);
-            HitboxUp.gameObject.SetActive(true);
-            HitboxDown.gameObject.SetActive(true);
-
-            activeHitbox = HitboxRight; // cualquiera para luego desactivar
+            sfxAudioSource.PlayOneShot(singleAttackClip);
         }
-        else if (attackCount == 1)
-        {
-            // Sonido para ataque simple
-            if (sfxAudioSource != null && singleAttackClip != null)
-            {
-                sfxAudioSource.PlayOneShot(singleAttackClip);
-            }
 
-            // Activa solo el hitbox correspondiente
-            if (attackRight) ActivateHitbox(HitboxRight);
-            else if (attackLeft) ActivateHitbox(HitboxLeft);
-            else if (attackUp) ActivateHitbox(HitboxUp);
-            else if (attackDown) ActivateHitbox(HitboxDown);
-        }
-        else if (attackCount > 1 && attackCount < 4)
-        {
-            // Si ataca con 2 o 3 botones, reproduce el sonido simple una sola vez
-            if (sfxAudioSource != null && singleAttackClip != null)
-            {
-                sfxAudioSource.PlayOneShot(singleAttackClip);
-            }
-
-            // Activa solo el primer hitbox detectado, para evitar activar varios a la vez
-            if (attackRight) ActivateHitbox(HitboxRight);
-            else if (attackLeft) ActivateHitbox(HitboxLeft);
-            else if (attackUp) ActivateHitbox(HitboxUp);
-            else if (attackDown) ActivateHitbox(HitboxDown);
-        }
+        if (x == 1f) ActivateHitbox(HitboxRight);
+        else if (x == -1f) ActivateHitbox(HitboxLeft);
+        else if (y == 1f) ActivateHitbox(HitboxUp);
+        else if (y == -1f) ActivateHitbox(HitboxDown);
     }
 
     void ActivateHitbox(BoxCollider2D hitbox)
