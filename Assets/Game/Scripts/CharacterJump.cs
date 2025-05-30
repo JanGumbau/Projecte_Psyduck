@@ -17,7 +17,7 @@
 
         [SerializeField] private AudioMixerGroup jumpSoundMixerGroup; // Asignar en inspector
 
-        public Rigidbody2D rb;
+    public bool allowExtraJump = false;
 
         public bool isJumping = false;
         public bool isGrounded = false;
