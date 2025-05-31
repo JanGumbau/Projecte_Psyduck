@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: VPPixel-Simplified SDF
+  m_Name: VPPixel MENU
   m_EditorClassIdentifier: 
-  hashCode: 1887182366
+  hashCode: -1798953315
   material: {fileID: 6130595139575661645}
-  materialHashCode: -1034813698
+  materialHashCode: -1215299043
   m_Version: 1.1.0
   m_SourceFontFileGUID: 8ea7abc305033ee44ac52aa9c769c067
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 8ea7abc305033ee44ac52aa9c769c067, type: 3}
@@ -2478,7 +2478,9 @@ Material:
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - BEVEL_ON
+  - GLOW_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -2513,11 +2515,11 @@ Material:
     m_Ints: []
     m_Floats:
     - _Ambient: 0.497
-    - _Bevel: 0.495
-    - _BevelClamp: 0
-    - _BevelOffset: -0.013
+    - _Bevel: 0.482
+    - _BevelClamp: 1
+    - _BevelOffset: -0.026
     - _BevelRoundness: 0
-    - _BevelWidth: -0.021
+    - _BevelWidth: -0.029
     - _BumpFace: 0
     - _BumpOutline: 0
     - _ColorMask: 15
@@ -2526,10 +2528,10 @@ Material:
     - _FaceDilate: 0
     - _FaceUVSpeedX: 0
     - _FaceUVSpeedY: 0
-    - _GlowInner: 0.009
-    - _GlowOffset: 1
-    - _GlowOuter: 0.05
-    - _GlowPower: 1
+    - _GlowInner: 1
+    - _GlowOffset: 0.578
+    - _GlowOuter: 0.57
+    - _GlowPower: 0.27
     - _GradientScale: 6
     - _LightAngle: 3.13
     - _MaskSoftnessX: 0
@@ -2541,11 +2543,11 @@ Material:
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 15
     - _ScaleRatioA: 0.8333333
-    - _ScaleRatioB: 0.6448413
+    - _ScaleRatioB: 0.58979386
     - _ScaleRatioC: 0.6770833
     - _ScaleX: 1
     - _ScaleY: 1
-    - _ShaderFlags: 0
+    - _ShaderFlags: 1
     - _Sharpness: 0
     - _SpecularPower: 2
     - _Stencil: 0
@@ -2567,12 +2569,12 @@ Material:
     - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
     - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
     - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
-    - _GlowColor: {r: 0, g: 4.0508046, b: 95.874504, a: 1}
+    - _GlowColor: {r: 0, g: 0.5063506, b: 11.984313, a: 1}
     - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectFaceColor: {r: 0, g: 0.88507134, b: 47.09435, a: 1}
     - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecularColor: {r: 3.5788965, g: 0, b: 341.78006, a: 1}
+    - _SpecularColor: {r: 0.003921621, g: 0, b: 0.3745098, a: 1}
     - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_BuildTextureStacks: []
 --- !u!28 &6404242927006827266

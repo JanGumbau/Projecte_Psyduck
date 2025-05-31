@@ -1394,6 +1394,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 133333926}
     m_Modifications:
+    - target: {fileID: 3349331385398666943, guid: 6d9c2424d7ff35544a8a56c1ad3b29c3, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1077.8884
+      objectReference: {fileID: 0}
+    - target: {fileID: 3349331385398666943, guid: 6d9c2424d7ff35544a8a56c1ad3b29c3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.22108199
+      objectReference: {fileID: 0}
     - target: {fileID: 5726036626312998855, guid: 6d9c2424d7ff35544a8a56c1ad3b29c3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1468,11 +1476,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6079325252253157819, guid: 6d9c2424d7ff35544a8a56c1ad3b29c3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -4
+      value: -8.709991
       objectReference: {fileID: 0}
     - target: {fileID: 6079325252253157819, guid: 6d9c2424d7ff35544a8a56c1ad3b29c3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -1.8800049
       objectReference: {fileID: 0}
     - target: {fileID: 6079325252253157819, guid: 6d9c2424d7ff35544a8a56c1ad3b29c3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2696,7 +2704,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: MenuScene
+          m_StringArgument: NewMainMenu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1119021577
