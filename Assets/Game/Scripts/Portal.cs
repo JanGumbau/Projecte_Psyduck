@@ -7,6 +7,7 @@ public class Portal : MonoBehaviour
 {
     public EnemyManager enemyManager;
     public GameObject panelUI;
+    public string sceneToLoad; 
     private bool hasActivated = false;
     public float scaleDuration = 0.5f;
 
@@ -16,7 +17,21 @@ public class Portal : MonoBehaviour
         {
             panelUI.SetActive(false);
             Cursor.visible = false;
-           
+        }
+    }
+
+    void Update()
+    {
+        if (panelUI != null && panelUI.activeSelf && Input.GetKeyDown(KeyCode.Return))
+        {
+            if (!string.IsNullOrEmpty(sceneToLoad))
+            {
+                SceneManager.LoadScene(sceneToLoad);
+            }
+            else
+            {
+                Debug.LogWarning("No asignado inspector.");
+            }
         }
     }
 
@@ -34,9 +49,9 @@ public class Portal : MonoBehaviour
 
             if (panelUI != null)
             {
-                panelUI.SetActive(true); // Activamos primero para que se muestre
+                panelUI.SetActive(true);
                 Destroy(other.gameObject);
-                panelUI.transform.localScale = Vector3.zero; // Empezamos desde cero
+                panelUI.transform.localScale = Vector3.zero;
                 Cursor.visible = true;
                 StartCoroutine(ScaleInPanel(panelUI.transform));
             }
