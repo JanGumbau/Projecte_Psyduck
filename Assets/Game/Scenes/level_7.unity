@@ -2215,7 +2215,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: MenuScene
+          m_StringArgument: NewMainMenu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &964998395
@@ -5319,11 +5319,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6079325252253157819, guid: 6d9c2424d7ff35544a8a56c1ad3b29c3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -8.77
+      value: -8.769989
       objectReference: {fileID: 0}
     - target: {fileID: 6079325252253157819, guid: 6d9c2424d7ff35544a8a56c1ad3b29c3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1.87
+      value: -1.8699951
       objectReference: {fileID: 0}
     - target: {fileID: 6079325252253157819, guid: 6d9c2424d7ff35544a8a56c1ad3b29c3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
