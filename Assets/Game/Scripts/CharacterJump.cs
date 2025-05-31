@@ -26,7 +26,7 @@
         public bool jumpReleased = false;
         private Collider2D col;
 
-        private bool allowExtraJump = false;
+        public bool allowExtraJump = false;
 
         // Coyote time & jump buffer
         private float coyoteTimeCounter = 0f;
@@ -78,13 +78,14 @@
             {
                 jumpPressed = true;
                 jumpBufferCounter = 0f;
-                allowExtraJump = false;
             }
 
             if ((Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.W)) && isJumping)
             {
                 jumpReleased = true;
             }
+
+
         }
 
         void FixedUpdate()
