@@ -32,7 +32,10 @@
         private float coyoteTimeCounter = 0f;
         private float jumpBufferCounter = 0f;
 
-        void Start()
+        private bool canDoubleJump = false;
+        private bool hasDoubleJumped = false;
+
+    void Start()
         {
             rb = GetComponent<Rigidbody2D>();
             col = GetComponent<Collider2D>();
@@ -58,11 +61,13 @@
 
             isGrounded = leftHit.collider != null || rightHit.collider != null;
 
-            if (isGrounded && rb.velocity.y <= 0.01f)
-                isJumping = false;
-
-            // --- COYOTE TIME ---
-            if (isGrounded)
+        if (isGrounded && rb.velocity.y <= 0.01f)
+        {
+            isJumping = false;
+            hasDoubleJumped = false;
+        }
+        // --- COYOTE TIME ---
+        if (isGrounded)
                 coyoteTimeCounter = coyoteTime;
             else
                 coyoteTimeCounter -= Time.deltaTime;
@@ -73,14 +78,24 @@
             else
                 jumpBufferCounter -= Time.deltaTime;
 
-            // --- JUMP REQUEST ---
-            if ((jumpBufferCounter > 0 && coyoteTimeCounter > 0) || (canJump && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))))
-            {
-                jumpPressed = true;
-                jumpBufferCounter = 0f;
-            }
+        // --- JUMP REQUEST ---
+        if (
+            (jumpBufferCounter > 0 && coyoteTimeCounter > 0) || // Salt normal
+            (canJump && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))) || // Altres salts permesos
+            (!isGrounded && allowExtraJump && !hasDoubleJumped && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))) // ✅ Doble salt
+        )
+        {
+            jumpPressed = true;
+            jumpBufferCounter = 0f;
 
-            if ((Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.W)) && isJumping)
+            // Si és un doble salt
+            if (!isGrounded && coyoteTimeCounter <= 0 && allowExtraJump && !hasDoubleJumped)
+            {
+                hasDoubleJumped = true;
+            }
+        }
+
+        if ((Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.W)) && isJumping)
             {
                 jumpReleased = true;
             }
@@ -90,18 +105,26 @@
 
         void FixedUpdate()
         {
-            if (jumpPressed)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, Impuls);
-                isJumping = true;
-                isGrounded = false;
-                jumpPressed = false;
-                coyoteTimeCounter = 0f; // Consume el coyote time
+        if (jumpPressed)
+        {
+            float finalImpuls = Impuls;
 
-                PlayJumpSound();
+            // Si és un doble salt, augmentem una mica la força
+            if (hasDoubleJumped && !isGrounded)
+            {
+                finalImpuls *= 1.2f; 
             }
 
-            if (jumpReleased)
+            rb.velocity = new Vector2(rb.velocity.x, finalImpuls);
+            isJumping = true;
+            isGrounded = false;
+            jumpPressed = false;
+            coyoteTimeCounter = 0f;
+
+            PlayJumpSound();
+        }
+
+        if (jumpReleased)
             {
                 if (rb.velocity.y > 0)
                 {
