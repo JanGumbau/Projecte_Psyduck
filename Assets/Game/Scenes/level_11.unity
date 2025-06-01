@@ -3834,7 +3834,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyManager: {fileID: 853216306}
   panelUI: {fileID: 71078173}
-  sceneToLoad: 
+  sceneToLoad: level_12
   scaleDuration: 0.5
 --- !u!95 &1671934463
 Animator:

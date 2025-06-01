@@ -2086,7 +2086,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: NewMenuScene
+          m_StringArgument: NewMainMenu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &666545909
@@ -4503,7 +4503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyManager: {fileID: 853216306}
   panelUI: {fileID: 71078173}
-  sceneToLoad: 
+  sceneToLoad: NewMainMenu
   scaleDuration: 0.5
 --- !u!95 &1671934463
 Animator:
