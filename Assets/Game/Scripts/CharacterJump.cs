@@ -65,6 +65,7 @@
         {
             isJumping = false;
             hasDoubleJumped = false;
+            allowExtraJump = false;
         }
         // --- COYOTE TIME ---
         if (isGrounded)
@@ -99,8 +100,6 @@
             {
                 jumpReleased = true;
             }
-
-
         }
 
         void FixedUpdate()
@@ -145,7 +144,8 @@
             if (collision.gameObject.CompareTag("ENEMIC_AMARILLO") && !isGrounded)
             {
                 allowExtraJump = true;
-            }
+                hasDoubleJumped = false;
+        }
         }
 
         void OnDrawGizmos()
