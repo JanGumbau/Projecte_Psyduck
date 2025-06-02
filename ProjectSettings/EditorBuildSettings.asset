@@ -60,7 +60,10 @@ EditorBuildSettings:
     path: Assets/Game/Scenes/level_10.unity
     guid: efc36baff7f8fdb48af1c1f1a10debb0
   - enabled: 1
-    path: Assets/Game/Scenes/No utilitzades/level_11.unity
+    path: Assets/Game/Scenes/level_11.unity
+    guid: 7382bbfd7a34d084c9ebb9d761eef931
+  - enabled: 0
+    path: Assets/Game/Scenes/No utilitzades/level_111.unity
     guid: 7a2a45eb22026b644ba95df74ab847ce
   - enabled: 1
     path: Assets/Game/Scenes/level_12.unity
