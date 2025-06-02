@@ -7,11 +7,10 @@ Nom alumne: Nil Bosch      Usuari Github:  Nilisim12
 Branca actual: develop
 
 Controls:
-  - Moviment: W / D
-  - Salt: Space
-  - Atac: "fletxes"
-  - Pogo: Atac cap abaix a sobre d'un enemic
+  - Moviment: A / D
+  - Salt: Space o W
+  - Atacs:
+      - Empenta: "fletxes"
+      - Salt a sobre del slime
   - Reiniciar: r
-
-Existeix un salt sobre els enemics per matarlos sense atacar, però no està a develop per diversos problemes
-ho acabarem afegint després.
+  - Continuar següent nivell: enter
