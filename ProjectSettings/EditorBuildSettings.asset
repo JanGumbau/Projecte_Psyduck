@@ -26,7 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Scenes/tutorial_3.unity
     guid: 709682209ef71bb46a5596e8da4702d2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Game/Scenes/tutorial_4.unity
     guid: 79288659da621614cb3ae7e41eb153bb
   - enabled: 1
@@ -59,6 +59,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Scenes/level_10.unity
     guid: efc36baff7f8fdb48af1c1f1a10debb0
+  - enabled: 1
+    path: Assets/Game/Scenes/tutorial_4 1.unity
+    guid: b8420443847b06a499113c52af4cb9bb
   - enabled: 1
     path: Assets/Game/Scenes/level_11.unity
     guid: 7382bbfd7a34d084c9ebb9d761eef931
