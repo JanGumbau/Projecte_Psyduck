@@ -619,9 +619,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 997712570}
-  tiempoImagen1: 8
-  tiempoImagen2: 7
-  tiempoImagen3: 5
+  tiempoImagen1: 10
+  tiempoImagen2: 8
+  tiempoImagen3: 6
   tiempoImagen4: 4
   imagen7: {fileID: 795597054}
   imagen8: {fileID: 1076213857}
