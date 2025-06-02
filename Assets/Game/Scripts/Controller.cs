@@ -175,7 +175,13 @@ public class ControllerCharacter : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow)) y = 1f;
         else if (Input.GetKeyDown(KeyCode.DownArrow)) y = -1f;
 
-        // Debug opcional per verificar direcció d'atac
+        // Ajustar dirección horizontal según el estado de flipX
+        if (spriteRenderer.flipX)
+        {
+            x = -x; // Invertir la dirección horizontal
+        }
+
+        // Debug opcional para verificar la dirección de ataque
         Debug.Log("Attack direction → X: " + x + " | Y: " + y);
 
         animator.SetFloat("attackX", x);
@@ -190,8 +196,9 @@ public class ControllerCharacter : MonoBehaviour
             sfxAudioSource.PlayOneShot(singleAttackClip);
         }
 
-        if (x == 1f) ActivateHitbox(HitboxRight);
-        else if (x == -1f) ActivateHitbox(HitboxLeft);
+        // Activar la hitbox correcta según la dirección ajustada
+        if (x == 1f) ActivateHitbox(spriteRenderer.flipX ? HitboxLeft : HitboxRight);
+        else if (x == -1f) ActivateHitbox(spriteRenderer.flipX ? HitboxRight : HitboxLeft);
         else if (y == 1f) ActivateHitbox(HitboxUp);
         else if (y == -1f) ActivateHitbox(HitboxDown);
     }
