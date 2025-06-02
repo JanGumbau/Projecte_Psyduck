@@ -3182,7 +3182,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6079325252253157819, guid: 6d9c2424d7ff35544a8a56c1ad3b29c3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1.8300018
+      value: -1.8300171
       objectReference: {fileID: 0}
     - target: {fileID: 6079325252253157819, guid: 6d9c2424d7ff35544a8a56c1ad3b29c3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3554,10 +3554,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 1527961635}
-  tiempoImagen1: 12
-  tiempoImagen2: 10
-  tiempoImagen3: 8
-  tiempoImagen4: 6
+  tiempoImagen1: 10
+  tiempoImagen2: 8
+  tiempoImagen3: 6
+  tiempoImagen4: 5
   imagen7: {fileID: 1022947710}
   imagen8: {fileID: 1396556066}
   imagen9: {fileID: 1382141356}
