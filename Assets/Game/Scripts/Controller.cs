@@ -191,16 +191,19 @@ public class ControllerCharacter : MonoBehaviour
         isAttacking = true;
         attackTimer = attackCooldown;
 
-        if (sfxAudioSource != null && singleAttackClip != null)
-        {
-            sfxAudioSource.PlayOneShot(singleAttackClip);
-        }
-
         // Activar la hitbox correcta según la dirección ajustada
         if (x == 1f) ActivateHitbox(spriteRenderer.flipX ? HitboxLeft : HitboxRight);
         else if (x == -1f) ActivateHitbox(spriteRenderer.flipX ? HitboxRight : HitboxLeft);
         else if (y == 1f) ActivateHitbox(HitboxUp);
         else if (y == -1f) ActivateHitbox(HitboxDown);
+    }
+
+    public void sonidoEspada()
+    {
+        if (sfxAudioSource != null && singleAttackClip != null)
+        {
+            sfxAudioSource.PlayOneShot(singleAttackClip);
+        }
     }
 
     void ActivateHitbox(BoxCollider2D hitbox)
