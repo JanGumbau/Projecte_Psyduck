@@ -1,32 +1,31 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Color_button : MonoBehaviour
+public class SpriteButtonToggle : MonoBehaviour
 {
     private Button button;
-    private Color originalColor;
-    private Color pressedColor = Color.black;
-    private bool isOriginalColor = true;
+    private bool isOriginalSprite = true;
+
+    public Sprite originalSprite;   // Imagen original
+    public Sprite pressedSprite;    // Imagen al presionar
 
     void Start()
     {
         button = GetComponent<Button>();
-        originalColor = button.image.color; 
-
-        button.onClick.AddListener(ToggleColor);
+        button.onClick.AddListener(ToggleSprite);
     }
 
-    void ToggleColor()
+    void ToggleSprite()
     {
-        if (isOriginalColor)
+        if (isOriginalSprite)
         {
-            button.image.color = pressedColor;
+            button.image.sprite = pressedSprite;
         }
         else
         {
-            button.image.color = originalColor;
+            button.image.sprite = originalSprite;
         }
 
-        isOriginalColor = !isOriginalColor;
+        isOriginalSprite = !isOriginalSprite;
     }
 }
